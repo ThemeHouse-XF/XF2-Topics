@@ -1,0 +1,1 @@
+This is the text color that will automatically be used if it is determined that you have selected a light background color

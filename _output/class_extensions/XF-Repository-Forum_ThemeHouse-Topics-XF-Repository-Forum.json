@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Repository\\Forum",
+    "to_class": "ThemeHouse\\Topics\\XF\\Repository\\Forum",
+    "execute_order": 10,
+    "active": true
+}

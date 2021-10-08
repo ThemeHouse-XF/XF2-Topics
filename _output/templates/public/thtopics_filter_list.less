@@ -1,0 +1,44 @@
+.filterBar-filters {
+	[class*="filter-item"] {
+		margin: 2px ;
+	}
+
+	.th_topics__clearForums__wrapper {vertical-align: bottom;}
+	.th_topics__clearTopics__wrapper {vertical-align: bottom;}
+}
+
+.filterBar-filters .forum-filter-item {
+    display: none;
+    &.forum-filter-item--active {
+        display: inline-block;
+    }
+}
+
+.filterBar-filters .category-filter-item {
+    display: none;
+    &.category-filter-item--active {
+        display: inline-block;
+    }
+}
+
+.filterBar-filters .topic-filter-item {
+    display: none;
+    &.topic-filter-item--active {
+        display: inline-block;
+    }
+}
+
+.th_topics_clearTopics i,
+.th_topics_clearForums i, {
+    font-size: 18px;
+}
+
+.filterBar-filters .th_topics__clearTopics__wrapper,
+.filterBar-filters .th_topics__clearForums__wrapper {
+    display: none;
+}
+
+.th_topics__clearTopics__wrapper.thTopics__filterBar--activeFilter,
+.th_topics__clearForums__wrapper.thTopics__filterBar--activeFilter {
+    display: inline-block;
+}

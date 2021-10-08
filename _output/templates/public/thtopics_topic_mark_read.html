@@ -1,0 +1,26 @@
+<xf:if is="$topic">
+	<xf:title>{{ phrase('thtopics_mark_topic_read') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('thtopics_mark_topics_read') }}</xf:title>
+</xf:if>
+
+<xf:form action="{{ link('topics/mark-read', $topic, {'date': $date}) }}" class="block" ajax="true">
+	<div class="block-container">
+		<xf:if is="$topic">
+			<div class="block-body">
+				<xf:inforow rowtype="confirm">
+					{{ phrase('thtopics_you_sure_you_want_to_mark_this_topic_read') }}
+					<strong><a href="{{ link('topics', $topic) }}">{$topic.title}</a></strong>
+				</xf:inforow>
+			</div>
+			<xf:submitrow submit="{{ phrase('thtopics_mark_topic_read') }}" rowtype="simple" icon="markRead" />
+		<xf:else />
+			<div class="block-body">
+				<xf:inforow rowtype="confirm">{{ phrase('thtopics_you_sure_you_want_to_mark_all_topics_read') }}</xf:inforow>
+			</div>
+			<xf:submitrow submit="{{ phrase('thtopics_mark_topics_read') }}" rowtype="simple" icon="markRead" />
+		</xf:if>
+	</div>
+	
+	<xf:redirect url="{$redirect}" />
+</xf:form>

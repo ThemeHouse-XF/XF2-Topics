@@ -1,0 +1,40 @@
+<xf:if is="$isWatched">
+	<xf:title>{{ phrase('thtopics_unwatch_topic') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('thtopics_watch_topic') }}</xf:title>
+</xf:if>
+
+<xf:form action="{{ link('topics/watch', $topic) }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:if is="$isWatched">
+				<xf:inforow rowtype="confirm">
+					{{ phrase('thtopics_you_sure_you_want_to_unwatch_this_topic') }}
+				</xf:inforow>
+				<xf:hiddenval name="stop">1</xf:hiddenval>
+			<xf:else />
+				<xf:if is="$topic.allowed_watch_notifications != 'none'">
+					<xf:radiorow name="notify" value="thread"
+						label="{{ phrase('send_notifications_for') }}">
+
+						<xf:option value="thread">{{ phrase('new_threads') }}</xf:option>
+						<xf:if is="$topic.allowed_watch_notifications == 'all'">
+							<xf:option value="message">{{ phrase('new_messages') }}</xf:option>
+						</xf:if>
+						<xf:option value="" hint="{{ phrase('thtopics_no_notifications_topic_watch_description') }}">{{ phrase('dont_send_notifications') }}</xf:option>
+					</xf:radiorow>
+
+					<xf:checkboxrow label="{{ phrase('send_notifications_via') }}">
+						<xf:option name="send_alert" value="1" selected="true">{{ phrase('alerts') }}</xf:option>
+						<xf:option name="send_email" value="1">{{ phrase('emails') }}</xf:option>
+					</xf:checkboxrow>
+				</xf:if>
+			</xf:if>
+		</div>
+		<xf:if is="$isWatched">
+			<xf:submitrow submit="{{ phrase('unwatch') }}" rowtype="simple" icon="notificationsOff" />
+		<xf:else />
+			<xf:submitrow submit="{{ phrase('watch') }}" icon="notificationsOn" />
+		</xf:if>
+	</div>
+</xf:form>

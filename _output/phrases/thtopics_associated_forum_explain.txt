@@ -1,0 +1,1 @@
+This is the forum that a thread will live in if this topic is chosen. If this value is changed, all threads associated with this topic will be moved to the new forum.

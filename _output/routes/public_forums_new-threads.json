@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "forums",
+    "sub_name": "new-threads",
+    "format": "-/new-threads",
+    "build_class": "",
+    "build_method": "",
+    "controller": "XF:Forum",
+    "context": "forums",
+    "action_prefix": "newThreads"
+}

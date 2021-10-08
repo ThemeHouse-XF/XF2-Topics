@@ -1,0 +1,1 @@
+Selecting a topic that is already assigned to a topic group will reassign it as topics can only be in one topic group.

@@ -1,0 +1,124 @@
+<xf:title>{{ phrase('thtopics_thread_topic_tools') }}</xf:title>
+
+<xf:if is="$success">
+	<div class="blockMessage blockMessage--success blockMessage--iconic">{{ phrase('cache_rebuilt_successfully') }}</div>
+</xf:if>
+
+<xf:if is="$hasStoppedManualJobs">
+	<div class="blockMessage blockMessage--important blockMessage--iconic">
+		{{ phrase('there_manual_rebuild_jobs_awaiting_completion_continue_running', {'link': link('tools/run-job')}) }}
+	</div>
+</xf:if>
+
+<xf:set var="$createTopicsBody">
+	<xf:inforow>{{ phrase('thtopics_create_topics_for_forums_explain') }}</xf:inforow>
+		<xf:macro template="forum_selection_macros" name="select_forums"
+			arg-nodeIds="{{[]}}"
+			arg-nodeTree="{$nodeTree}"
+			arg-selectName="options[node_ids]"/>
+	<xf:numberboxrow name="options[batch]" value="25" min="1"
+					 label="{{ phrase('items_to_process_per_page') }}" />
+</xf:set>
+<xf:macro name="rebuild_job"
+		  arg-header="{{ phrase('thtopics_create_topics_for_forums') }}"
+		  arg-explain="test"
+		  arg-body="{$createTopicsBody}"
+		  arg-job="ThemeHouse\Topics:CreateForumTopics" />
+
+<xf:macro name="rebuild_job" arg-header="!" arg-body="" arg-submit="{{ phrase('rebuild_now') }}" arg-job="!">
+	<xf:form action="{{ link('topics/tools') }}" class="block">
+		<div class="block-container">
+			<h2 class="block-header">{$header|raw}</h2>
+			<xf:if is="$body"><div class="block-body">{$body|raw}</div></xf:if>
+			<xf:submitrow submit="{$submit}" />
+		</div>
+		<xf:hiddenval name="job">{$job}</xf:hiddenval>
+	</xf:form>
+</xf:macro>
+
+<xf:macro name="rebuild_job"
+		  arg-header="{{ phrase('thtopics_rebuild_topic_counters') }}"
+		  arg-body="{{ null }}"
+		  arg-job="ThemeHouse\Topics:Topic" />
+
+<xf:set var="$moderatorToolsJob">
+	<xf:formrow label="{{ phrase('thtopics_moderator_tools_job_action') }}" explain="{{ phrase('thtopics_moderator_tools_job_action_explain')}}">
+		<xf:select name="options[action]" class="js-mtActionToggle">
+			<xf:option value="add_additional">{{ phrase('thtopics_moderator_tools_job_add_additional_topic') }}</xf:option>
+			<xf:option value="remove_additional">{{ phrase('thtopics_moderator_tools_job_remove_additional_topic') }}</xf:option>
+		</xf:select>
+		<xf:select name="options[target_forum]" class="js-mtTargetForum">
+			<xf:foreach loop="$nodeTree->getFlattened()" value="$forum">
+				<xf:option value="{$forum.record.node_id}" disabled="{{$forum.record.node_type_id !== 'Forum'}}">{{ repeat('-', $forum.depth) . ' ' . $forum.record.title }}</xf:option>
+			</xf:foreach>
+		</xf:select>
+		<xf:select name="options[target_topic]" class="js-mtTargetTopic">
+			<xf:foreach loop="$topics" value="$topic">
+				<xf:option value="{$topic.topic_id}">{{ $topic.title }}</xf:option>
+			</xf:foreach>
+		</xf:select>
+	</xf:formrow>
+	<xf:formrow label="{{ phrase('thtopics_moderator_tools_job_location')}}" explain="{{ phrase('thtopics_moderator_tools_job_location_explain')}}">
+		<xf:select name="options[location]" class="js-mtLocationToggle">
+			<xf:option value="forum">{{ phrase('thtopics_moderator_tools_job_in_forum') }}</xf:option>
+			<xf:option value="topic">{{ phrase('thtopics_moderator_tools_job_with_topic') }}</xf:option>
+			<xf:option value="additional_topic">{{ phrase('thtopics_moderator_tools_job_with_additional_topic') }}</xf:option>
+			<xf:option value="prefix">{{ phrase('thtopics_tools_job_with_prefix') }}</xf:option>
+		</xf:select>
+		<xf:select name="options[source_forum]" class="js-mtSourceForum">
+			<xf:foreach loop="$nodeTree.getFlattened()" value="$forum">
+				<xf:option value="{$forum.record.node_id}" disabled="{{$forum.record.node_type_id !== 'Forum'}}">{{ repeat('-', $forum.depth) . ' ' . $forum.record.title }}</xf:option>
+			</xf:foreach>
+		</xf:select>
+		<xf:select name="options[source_topic]" class="js-mtSourceTopic">
+			<xf:foreach loop="$topics" value="$topic">
+				<xf:option value="{$topic.topic_id}">{{ $topic.title }}</xf:option>
+			</xf:foreach>
+		</xf:select>
+		<xf:select name="options[source_prefix]" class="js-mtSourcePrefix">
+			<xf:foreach loop="$prefixes" value="$prefix">
+				<xf:option value="{$prefix.prefix_id}">{{ $prefix.title }}</xf:option>
+			</xf:foreach>
+		</xf:select>
+	</xf:formrow>
+</xf:set>
+<xf:macro name="rebuild_job"
+		  arg-header="{{ phrase('thtopics_moderator_tools_job') }}"
+		  arg-explain="test"
+		  arg-body="{$moderatorToolsJob}"
+		  arg-job="ThemeHouse\Topics:BatchModeration" />
+
+<xf:js>
+	$('.js-mtActionToggle').on('change', function($event) {
+		var value = $(this).val();
+		if(value == 'move_thread') {
+			$('.js-mtTargetForum').show();
+			$('.js-mtTargetTopic').hide();
+		}
+		else {
+			$('.js-mtTargetForum').hide();
+			$('.js-mtTargetTopic').show();
+		}
+	});
+
+	$('.js-mtLocationToggle').on('change', function($event) {
+		var value = $(this).val();
+		if(value == 'forum') {
+			$('.js-mtSourceForum').show();
+			$('.js-mtSourceTopic').hide();
+			$('.js-mtSourcePrefix').hide();
+		}
+		else if(value == 'prefix') {
+			$('.js-mtSourcePrefix').show();
+			$('.js-mtSourceForum').hide();
+			$('.js-mtSourceTopic').hide();
+		}
+		else {
+			$('.js-mtSourceForum').hide();
+			$('.js-mtSourceTopic').show();
+			$('.js-mtSourcePrefix').hide();
+		}
+	});
+	
+	$('.js-mtActionToggle, .js-mtLocationToggle').trigger('change');
+</xf:js>

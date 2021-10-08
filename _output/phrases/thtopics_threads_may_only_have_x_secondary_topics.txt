@@ -1,0 +1,1 @@
+Threads may only have {count} additional topic(s).

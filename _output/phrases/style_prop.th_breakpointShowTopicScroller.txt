@@ -1,0 +1,1 @@
+Viewport width to show the horizontal topic filter bar

@@ -1,0 +1,53 @@
+<xf:title>{{ phrase('thtopics_all_topics') }}</xf:title>
+
+<xf:js src="themehouse/topics/topicsSearch.js"
+    min="themehouse/topics/topicsSearch.min.js"
+	addon="ThemeHouse/Topics" />
+<xf:css src="thtopics.less" />
+<xf:css src="thtopics_topic_cache.less" />
+<xf:css src="thtopics_widget_topic_filter.less" />
+
+<div data-topic-type="thread">
+	<div class="th_topics th_topicsAll topic-filter-container">
+		<div class="th_topicsSearch">
+			<input placeholder="{{ phrase('thtopics_search_topics...') }}" class="input" />
+		</div>
+
+		<div class="thTopicList thTopicList--full topic-filter-grid">
+			<xf:foreach loop="$topics" value="$topic">
+				<xf:macro name="topic_display" arg-topic="{$topic}" />
+			</xf:foreach>
+
+			<div class="th_topics__noResults block-row">
+				{{ phrase('no_results_found') }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<xf:macro name="topic_display" arg-topic="!" arg-topics="" arg-children="" arg-parentTopic="">
+	<a class="topic-filter-item topic-filter-item--thread {$topic.extra_class}{{ in_array($topic.topic_id, {$xf.visitor.getTopicFilters()}) ? ' topic-filter-item--active' : '' }}{{ $children ? 'topic-filter-item--hasChildren' : '' }}"
+	   href="{{ link('forums/all-threads', null, {'topics': $topic.topic_id}) }}"
+	   data-topic-id="{$topic.topic_id}"
+	   data-parent-topic-id="{{ $parentTopic ? $parentTopic.topic_id : '' }}"
+	   data-topic-title="{$topic.title}">
+		<i class="thTopicAction thTopicAction--add {$extraClass}" data-topic-id="{$topic.topic_id}">
+		</i>
+		<i class="thTopicAction thTopicAction--remove {$extraClass}" data-topic-id="{$topic.topic_id}">
+		</i>
+		<span class="thTopic--title">{$topic.title}</span>
+	</a>
+	<xf:if is="$children is not empty">
+		<xf:if is="$children is not empty">
+			<xf:set var="$parentTopic" value="{$topic}" />
+			<xf:foreach loop="$children" value="$dataEntry">
+				<xf:set var="$topic" value="{$topics.{$dataEntry->id}}" />
+				<xf:macro name="topic_display"
+						arg-parentTopic="{$parentTopic}"
+						arg-topic="{$topic}"
+						arg-topics="{$topics}"
+						arg-children="{$dataEntry->children}" />
+			</xf:foreach>
+		</xf:if>
+	</xf:if>
+</xf:macro>

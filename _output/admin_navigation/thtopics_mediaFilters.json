@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "thtopics_media",
+    "display_order": 1,
+    "link": "media-gallery-filters",
+    "icon": "",
+    "admin_permission_id": "thtopics",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}

@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "topics",
+    "sub_name": "layout",
+    "format": "layout",
+    "build_class": "",
+    "build_method": "",
+    "controller": "ThemeHouse\\Topics:Topic",
+    "context": "thtopics_layoutTopics",
+    "action_prefix": "layout"
+}

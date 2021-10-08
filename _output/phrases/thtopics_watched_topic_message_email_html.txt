@@ -1,0 +1,1 @@
+<p>{replier} posted a new message to a topic you are watching at {board}.</p>

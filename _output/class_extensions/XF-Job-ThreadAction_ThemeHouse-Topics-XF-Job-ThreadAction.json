@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Job\\ThreadAction",
+    "to_class": "ThemeHouse\\Topics\\XF\\Job\\ThreadAction",
+    "execute_order": 10,
+    "active": true
+}

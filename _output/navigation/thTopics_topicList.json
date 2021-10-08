@@ -1,0 +1,11 @@
+{
+    "parent_navigation_id": "forums",
+    "display_order": 50,
+    "navigation_type_id": "basic",
+    "type_config": {
+        "link": "{{ link('topics') }}",
+        "display_condition": "{$xf.options.thtopics_enableTopics} && {$xf.options.thtopic_topicListData} != '[]' && {$xf.options.forumsDefaultPage} != 'topic_list' && !$xf.options.thtopics_redirectForumList",
+        "extra_attributes": []
+    },
+    "enabled": true
+}

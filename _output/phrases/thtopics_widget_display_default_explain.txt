@@ -1,0 +1,1 @@
+This will display a simple vertical widget in sidebar widget positions and a horizontal scroller in all other widget positions.

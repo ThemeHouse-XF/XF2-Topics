@@ -1,0 +1,9 @@
+{
+    "template": "widget_new_threads",
+    "description": "Add 'View more...' button the new threads widget.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:if is=\"\\$style == 'full'\">.*?)(<xf:else \\/>)/s",
+    "replace": "$1\t<xf:include template=\"thtopics_widget_new_threads\" />\n\t\t\t\t$2"
+}

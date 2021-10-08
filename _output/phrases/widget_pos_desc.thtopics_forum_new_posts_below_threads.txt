@@ -1,0 +1,1 @@
+A position inside the main content area of the forum new posts page below the thread list. Note: This page is only available if the default forums page is set to “New posts”.

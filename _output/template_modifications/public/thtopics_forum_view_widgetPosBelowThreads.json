@@ -1,0 +1,9 @@
+{
+    "template": "forum_view",
+    "description": "Add widget position below thread list and in sidenav.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:ad position=\"forum_view_below_thread_list\" arg-forum=\"{$forum}\" />",
+    "replace": "<xf:widgetpos id=\"thtopics_forum_view_below_threads\" context-forum=\"{$forum}\" />\n<xf:widgetpos id=\"thtopics_forum_view_sidenav\" context-forum=\"{$forum}\" position=\"sidenav\" />\n\n$0"
+}

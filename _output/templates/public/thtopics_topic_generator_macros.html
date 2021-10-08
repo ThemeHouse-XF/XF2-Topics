@@ -1,0 +1,119 @@
+<xf:macro name="generator" arg-topic="!">
+
+.thTopic.thTopic--{$topic.topic_id},
+a.thTopic.thTopic--{$topic.topic_id},
+.thTopic.thTopic--{$topic.topic_id} a,
+.thTopic.thTopic--{$topic.topic_id} a:hover,
+.thTopic.thTopic--{$topic.topic_id}:hover,
+.thTopic.thTopic--{$topic.topic_id},
+.block-filterBar .thTopic--{$topic.topic_id}.filterBar-filterToggle,
+.block-filterBar .thTopic--{$topic.topic_id}.filterBar-filterToggle:hover {
+	<xf:if is="!$topic.isLight">
+		color: #fff;
+	<xf:else/>
+		color: rgba(0,0,0,.87);
+	</xf:if>
+}
+
+.p-body-header.thTopic--{$topic.topic_id}:not(.cover) {
+	<xf:if is="!$topic.isLight">
+		.p-title-value {color: #fff;}
+
+		.p-description {color: rgba(255,255,255,.7);}
+
+		.thTopicHeading__container__topics .thTopic--additional {
+			color: #fff;
+			background: none;
+		}
+
+		.button--cta {
+			color: #fff;
+			border: 2px solid #fff;
+			background: none;
+			box-shadow: none;
+
+			&:hover, &:active, &:focus {
+				background: #fff;
+				color: {$topic.colors.background}
+			}
+
+		}
+	<xf:else/>
+		.p-title-value {color: rgba(0,0,0,.87);}
+
+		.p-description {color: rgba(0,0,0,.54);}
+
+		.thTopicHeading__container__topics .thTopic--additional {
+			color: rgba(0,0,0,.87);
+		}
+
+		.button--cta {
+			color: #fff;
+			border: 2px solid #fff;
+			background: none;
+			box-shadow: none;
+		}
+
+		.button--cta {
+			color: rgba(0,0,0,.87);
+			border: 2px solid rgba(0,0,0,.87);
+			background: none;
+
+			&:hover, &:active, &:focus {
+				background: rgba(0,0,0,.87);
+				color: {$topic.colors.background}
+			}
+		}
+	</xf:if>
+}
+
+.thTopic--full.thTopic--{$topic.topic_id},
+.thTopic--full.thTopic--{$topic.topic_id} label.iconic > input + i:before {
+<xf:if is="!$topic.isLight">
+	color: rgba(255,255,255,.7);
+<xf:else/>
+	color: rgba(0,0,0,.54);
+</xf:if>
+}
+
+.thTopic.thTopic--{$topic.topic_id}, .thTopic--{$topic.topic_id},
+.filterBar-filterToggle.thTopic--{$topic.topic_id} {
+	background-color: {$topic.colors.background};
+}
+
+.thTopic.thTopic--{$topic.topic_id}:not(.no-hover):hover, .thTopic--{$topic.topic_id}:not(.no-hover):hover {
+	background-color: xf-intensify({$topic.colors.background}, 10%) !important;
+}
+
+.thTopic--{$topic.topic_id}.thTopic--inverted,
+.p-body-header .thTopic--{$topic.topic_id}.thTopic--inverted {
+	color: {$topic.colors.background};
+	<xf:if is="!$topic.isLight">
+		background-color: #fff !important;
+	<xf:else />
+		background-color: rgba(0,0,0,.87) !important;
+	</xf:if>
+
+	&:hover {
+		/* color: xf-intensify({$topic.colors.background}, 15%) !important; */
+		<xf:if is="!$topic.isLight">
+			color: #fff;
+		<xf:else/>
+			color: rgba(0,0,0,.87);
+		</xf:if>
+		text-decoration: underline;
+	}
+}
+
+.topic-filter-item--thread[data-topic-id="{$topic.topic_id}"] {
+	&:hover .thTopic--title {
+		color: {$topic.colors.background};
+	}
+	.thTopicAction {
+		color: {$topic.colors.background};
+	}
+	&.topic-filter-item--active .thTopic--title {
+		color: {$topic.colors.background};
+	}
+}
+</xf:macro>

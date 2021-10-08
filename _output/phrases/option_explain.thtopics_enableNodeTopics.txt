@@ -1,0 +1,1 @@
+If you don't use the node topics system, you can completely disable it but still keep the all threads and new threads pages.

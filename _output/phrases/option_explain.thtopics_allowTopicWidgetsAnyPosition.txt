@@ -1,0 +1,2 @@
+This will enable topic widgets to appear on pages that don't include a supported filter bar. Clicking on a topic in a widget on a non-filterable page will redirect to the all threads page.<br />
+Note: this will add an additional query and additional Javascript to every page, which could increase page load times if you have a very large number of topics.

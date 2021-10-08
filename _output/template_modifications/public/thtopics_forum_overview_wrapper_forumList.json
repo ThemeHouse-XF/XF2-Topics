@@ -1,0 +1,9 @@
+{
+    "template": "forum_overview_wrapper",
+    "description": "Replace \"Forum list\" with \"Topic list\" if required.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "{{ phrase('forum_list') }}",
+    "replace": "{{ $xf.options.thtopics_redirectForumList ? phrase('thtopics_topic_list') : phrase('forum_list') }}"
+}

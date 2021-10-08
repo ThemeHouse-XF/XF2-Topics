@@ -1,0 +1,1 @@
+This option allows you to control if your users are able to filter thread and post searches by thread topics, node topics or both. If no thread topics have been created, this option will be ignored.

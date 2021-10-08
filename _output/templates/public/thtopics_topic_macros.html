@@ -1,0 +1,180 @@
+<xf:macro name="full"
+		  arg-topic="!"
+		  arg-extraClass=""
+		  arg-topics="{{ [] }}"
+		  arg-children="{{ [] }}"
+		  arg-href="{{ false }}"
+		  arg-onClick="{{ false }}"
+		  arg-showLastPost="{{ true }}"
+		  arg-showStats="{{ true }}"
+		  arg-showDescription="{{ true }}"
+		  arg-bonusInfo=""
+		  arg-chooseItem="{{ false }}">
+	<xf:if is="$topic.canView()">
+		<xf:if is="!{$href}">
+			<xf:set var="$href" value="{{ link('forums/all-threads', null, {'topics': $topic.title . '.' . $topic.topic_id}) }}" />
+		</xf:if>
+		<xf:set var="$extra" value="" />
+		<xf:if is="$onClick">
+			<xf:set var="$extra" value="{$extra} data-xf-click=\"{$onClick}\"" />
+		</xf:if>
+
+		<div class="thTopic__outer topic-filter-item" data-topic-title="{$topic.title}">
+			<div class="thTopic thTopic--full thTopic--{$topic.topic_id} {$topic.extra_class} {$extraClass}{{ $topic.isUnread() ? ' thTopic--unread' : ' thTopic--read' }}"
+				 data-topic-id="{$topic.topic_id}" {$extra|raw}>
+
+				<h3 class="thTopic__title">
+					<xf:if is="$chooseItem">
+						<xf:checkbox standalone="true">
+							<xf:option labelclass="u-pullRight" class="js-chooseItem" name="topic_ids[]" value="{$topic.topic_id}" />
+						</xf:checkbox>
+					</xf:if>
+					<xf:if is="$topic.isUnread()">
+						<a href="{{ link('topics/mark-read', $topic, {'date': $xf.time}) }}" data-xf-click="overlay">
+							<i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+						</a>
+					</xf:if>
+					<a href="{$href}">{$topic.title}</a>
+				</h3>
+
+				<xf:if is="$showDescription && ($topic.description || $topic.Forum.description)">
+					<div class="thTopic__description">{{ $topic.description ? $topic.description|raw : $topic.Forum.description|raw }}</div>
+				</xf:if>
+
+				<xf:if is="$bonusInfo is not empty">
+					<div class="node-bonus">{$bonusInfo}</div>
+				</xf:if>
+
+				<xf:if is="$children is not empty">
+					<xf:macro name="children_menu"
+							  arg-topics="{$topics}"
+							  arg-children="{$children}"
+							  arg-parentTopics="{$topic.title}.{$topic.topic_id}," />
+				</xf:if>
+
+				<xf:if is="$showStats">
+					<div class="node-stats">
+						<dl class="pairs pairs--rows">
+							<dt>{{ phrase('threads') }}</dt>
+							<dd>{$topic.discussion_count|number}</dd>
+						</dl>
+						<dl class="pairs pairs--rows">
+							<dt>{{ phrase('messages') }}</dt>
+							<dd>{$topic.message_count|number}</dd>
+						</dl>
+					</div>
+				</xf:if>
+
+				<xf:if is="{{ property('thtopics_showLastPost') }} && {$topic.last_post_cache.last_post_date}">
+					<div class="node-extra">
+						<div class="node-extra-row">
+							<a href="{{ link('posts', {'post_id': $topic.last_post_cache.last_post_id}) }}"
+							   class="node-extra-title"
+							   title="{$topic.last_post_cache.last_thread_title}">
+								{$topic.last_post_cache.last_thread_title}
+							</a>
+						</div>
+						<div class="node-extra-row">
+							<ul class="listInline listInline--bullet">
+								<li>
+									<xf:date time="{$topic.last_post_cache.last_post_date}" class="node-extra-date" />
+									<xf:if is="$xf.visitor.isIgnoring($topic.last_post_cache.last_post_user_id)">
+										<li class="node-extra-user">
+											{{ phrase('ignored_member') }}
+										</li>
+										<xf:else />
+										<li class="node-extra-user">
+											<xf:username user="{{ {'user_id': $topic.last_post_cache.last_post_user_id, 'username': $topic.last_post_cache.last_post_username} }}" />
+										</li>
+									</xf:if>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</xf:if>
+			</div>
+		</div>
+
+		<xf:macro name="assets" />
+		<xf:js src="themehouse/topics/topicsFull.js"
+			min="themehouse/topics/topicsFull.min.js"
+			addon="ThemeHouse/Topics" />
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="children_menu" arg-topics="!" arg-children="!" arg-parentTopics="!">
+	<xf:if contentcheck="true">
+		<div class="node-subTopicMenu">
+			<a class="menuTrigger" data-xf-click="menu" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true">{{ phrase('thtopics_sub_topics') }}</a>
+			<div class="menu" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					<h4 class="menu-header">{{ phrase('thtopics_sub_topics') }}</h4>
+					<ol class="subTopicMenu">
+					<xf:contentcheck>
+						<xf:macro name="children"
+							arg-topics="{$topics}"
+							arg-parentTopics="{$parentTopics}"
+							arg-children="{$children}" />
+					</xf:contentcheck>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="children"
+		  arg-topics="!"
+		  arg-parentTopics="!"
+		  arg-children="!">
+	<xf:foreach loop="{$children}" value="{$dataEntry}">
+		<xf:set var="$topic" value="{$topics.{$dataEntry->id}}" />
+		<li class="thTopic thTopic--{$topic.topic_id} {$topic.extra_class}">
+			<a href="{{ link('forums/all-threads', null, {'topics': $parentTopics . $topic.title . '.' . $topic.topic_id}) }}">{$topic.title}</a>
+		</li>
+	</xf:foreach>
+</xf:macro>
+
+<xf:macro name="min"
+		  arg-topic="!"
+		  arg-extraClass=""
+		  arg-size="s"
+		  arg-href="{{ false }}"
+		  arg-tag="a"
+		  arg-onClick="{{ false }}">
+	<xf:if is="!{$href}">
+		<xf:set var="$href" value="{{ link('forums/all-threads', null, {'topics': $topic.title . '.' . $topic.topic_id}) }}" />
+	</xf:if>
+	<xf:set var="$extra" value="" />
+	<xf:if is="$onClick">
+		<xf:set var="$extra" value="{$extra} data-xf-click='{$onClick}'" />
+	</xf:if>
+
+	<{$tag} href="{$href}"
+			class="thTopic thTopic--{$topic.topic_id} thTopic--{$size} {$topic.extra_class} {$extraClass}"
+			data-topic-id="{$topic.topic_id}" {$extra|raw}>
+		{$topic.title}
+		</{$tag}>
+
+	<xf:macro name="assets" />
+</xf:macro>
+
+<xf:macro name="post_thread"
+		  arg-topic="{{ false }}">
+	<xf:if is="$xf.visitor.canCreateThread()">
+		<xf:button href="{{ link('topics/post-thread-chooser', $topic) }}"
+				   class="button--cta"
+				   icon="write"
+				   overlay="true"
+				   data-cache="false">
+			{{ phrase('post_thread...') }}
+		</xf:button>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="assets">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<xf:css src="thtopics_widget_topic_filter.less" />
+	<xf:css src="thtopics_topic_chooser.less" />
+</xf:macro>

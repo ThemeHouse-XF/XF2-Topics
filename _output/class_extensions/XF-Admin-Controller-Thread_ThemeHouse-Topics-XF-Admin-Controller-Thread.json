@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Admin\\Controller\\Thread",
+    "to_class": "ThemeHouse\\Topics\\XF\\Admin\\Controller\\Thread",
+    "execute_order": 10,
+    "active": true
+}

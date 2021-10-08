@@ -1,0 +1,9 @@
+{
+    "template": "thread_batch_update_confirm",
+    "description": "Add topics options to thread batch update confirm.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"$prefixes.prefixesGrouped\">",
+    "replace": "<xf:include template=\"thtopics_thread_batch_update_confirm\" />\n\n\t\t\t$0"
+}

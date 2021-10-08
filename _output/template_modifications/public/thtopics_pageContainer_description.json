@@ -1,0 +1,9 @@
+{
+    "template": "PAGE_CONTAINER",
+    "description": "Removes description from PAGE_CONTAINER when topic bar is set",
+    "execution_order": 11,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/<div class=\"p-description\">.*?<\\/div>/",
+    "replace": "<xf:if is=\"!$thtopics_showTopicBar || $thtopics_dontHideDescription\">\n$0\n</xf:if>"
+}

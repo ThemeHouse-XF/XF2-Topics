@@ -1,0 +1,35 @@
+.hScroller {
+	.hScroller-scroll {
+		.topic-filter-item {
+			display:none;
+		}
+		.topic-filter-item.topic-filter-item--active {
+			display:block;
+		}
+	}
+
+	@iterations: {$xf.options.thtopics_visibleFilterTopics};
+	.topic-visible-filters-loop (@i) when (@i > 0) {
+		&.topic-visible-filters-@{i} {
+			.topic-filter-item:nth-child(-n+@{i}) {
+				&[data-parent-topic-id=""] {
+					display: block;
+				}
+				&.topic-filter-item--node {
+					display: block;
+				}
+				&.topic-filter-item--parentActive {
+					display: block;
+				}
+			}
+		}
+		.topic-visible-filters-loop(@i - 1);
+	}
+	.topic-visible-filters-loop (@iterations);
+}
+
+@media (min-width: @xf-th_breakpointShowTopicScroller) {
+	.has-simpleverticaltopics .topic-filter-responsive .topic-filter-scroller {
+		display: none;
+	}
+}

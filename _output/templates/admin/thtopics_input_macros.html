@@ -1,0 +1,33 @@
+<xf:macro name="color_picker"
+		  arg-name="!"
+		  arg-label="!"
+		  arg-required="{{ false }}"
+		  arg-row="{{ true }}"
+		  arg-value="">
+	<xf:css src="public:color_picker.less" />
+	<xf:js src="xf/color_picker.js" min="1" />
+
+	<xf:js src="themehouse/topics/topicColor.js" min="themehouse/topics/topicColor.min.js" addon="ThemeHouse/Topics" />
+
+	<xf:set var="$picker">
+		<div class="inputGroup inputGroup--joined inputGroup--color"
+			 data-xf-init="color-picker"
+			 data-allow-palette="false"
+			 data-map-name="">
+			<xf:textbox name="{$name}" value="{$value}" required="{$required}" dir="ltr" />
+			<div class="inputGroup-text"><a href="javascript:void(0)" title="{{ phrase('thtopics_random_material_color') }}" data-xf-init="tooltip" class="colorPickerRandom"><i class="fa fa-refresh"></i></a></div>
+			<div class="inputGroup-text"><span class="colorPickerBox js-colorPickerTrigger"></span></div>
+		</div>
+	</xf:set>
+
+	<xf:if is="$row">
+		<xf:formrow rowclass="formRow--input"
+					label="{$label}">
+			{$picker|raw}
+		</xf:formrow>
+		<xf:else />
+		{$picker|raw}
+	</xf:if>
+
+	<xf:macro template="public:color_picker_macros" name="color_picker_scripts" arg-colorData="{$colorData}" />
+</xf:macro>

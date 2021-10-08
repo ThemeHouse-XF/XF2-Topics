@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "thtopics_threads",
+    "display_order": 0,
+    "link": "topics",
+    "icon": "fa-tags",
+    "admin_permission_id": "thtopics",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}

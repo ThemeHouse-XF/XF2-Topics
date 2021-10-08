@@ -1,0 +1,1 @@
+Allow topic widgets to be added to any position

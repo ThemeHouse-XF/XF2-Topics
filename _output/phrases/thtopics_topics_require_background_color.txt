@@ -1,0 +1,1 @@
+Topics require a background color.

@@ -1,0 +1,37 @@
+<xf:if is="$topicGroup.isInsert()">
+	<xf:title>{{ phrase('thtopics_add_thread_topic_group') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('thtopics_edit_thread_topic_group:') }} {$topicGroup.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$topicGroup.isUpdate()">
+		<xf:button href="{{ link('topics/add', '', {'topic_group_id': $topicGroup.topic_group_id}) }}" icon="add">{{ phrase('thtopics_add_topic') }}</xf:button>
+		<xf:button href="{{ link('topic-groups/delete', $topicGroup) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('topic-groups/save', $topicGroup) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title"
+						value="{$topicGroup.title}"
+						maxlength="{{ max_length($topicGroup, 'title') }}"
+						label="{{ phrase('title') }}"
+						explain="{{ phrase('thtopics_topic_group_title_explain') }}" />
+
+			<xf:selectrow name="topic_ids"
+						multiple="multiple"
+						size="7"
+						value="{$topicGroup.topic_ids}"
+						label="{{ phrase('thtopics_topics') }}"
+						explain="{{ phrase('thtopics_topic_group_topics_explain') }}">
+				<xf:foreach loop="$topicOptions" value="$topicOption">
+					<xf:option value="{$topicOption.value}">
+						{$topicOption.label}
+					</xf:option>
+				</xf:foreach>
+			</xf:selectrow>
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>

@@ -1,0 +1,1 @@
+This includes forum view, all threads view and may include some pages from other add-ons that use the forum route.

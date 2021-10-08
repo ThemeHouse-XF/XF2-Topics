@@ -1,0 +1,9 @@
+{
+    "template": "search_form_post",
+    "description": "Add topics filter to search form.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:formrow.*\\s.*label=\"{{ phrase\\('search_in_forums'\\) }}\">)/U",
+    "replace": "<xf:if is=\"$xf.options.thtopics_enableTopics && $topics is not empty && $xf.options.thtopics_searchFilterOption != 'forum'\">\n\t<xf:macro template=\"thtopics_search_form\"\n\t\t\t  name=\"search_post\"\n\t\t\t  arg-topics=\"{$topics}\"/>\n</xf:if>\n$0"
+}

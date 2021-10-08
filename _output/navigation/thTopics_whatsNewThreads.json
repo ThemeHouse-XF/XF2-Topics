@@ -1,0 +1,13 @@
+{
+    "parent_navigation_id": "whatsNew",
+    "display_order": 99,
+    "navigation_type_id": "basic",
+    "type_config": {
+        "link": "{{ link('whats-new/threads') }}",
+        "display_condition": "{$xf.options.thtopics_showNewThreadsPage}",
+        "extra_attributes": {
+            "rel": "nofollow"
+        }
+    },
+    "enabled": true
+}

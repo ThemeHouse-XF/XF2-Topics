@@ -1,0 +1,9 @@
+{
+    "event_id": "templater_template_pre_render",
+    "execute_order": 10,
+    "callback_class": "ThemeHouse\\Topics\\Listener\\TemplaterTemplatePreRender",
+    "callback_method": "templaterTemplatePreRender",
+    "active": true,
+    "hint": "",
+    "description": ""
+}

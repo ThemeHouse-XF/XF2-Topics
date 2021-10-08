@@ -1,0 +1,13 @@
+{
+    "group_name": "thtopics_threadList",
+    "title": "Viewport width to show the horizontal topic filter bar",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": "@xf-responsiveWide",
+    "display_order": 0
+}

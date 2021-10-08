@@ -1,0 +1,37 @@
+<xf:macro name="topic_list"
+		  arg-thread="!"
+		  arg-forum="">
+	<xf:if is="$xf.options.thtopics_enableTopics && $thread.topics">
+		<xf:js src="themehouse/topics/threadList.js" min="themehouse/topics/threadList.min.js" addon="ThemeHouse/Topics" />
+		<xf:css src="thtopics.less" />
+		<xf:css src="thtopics_topic_cache.less" />
+		<div class="structItem-topicList">
+			<div class="structItem-topicList__inner">
+				<div class="structItem-topicList-topic">
+					<xf:macro template="thtopics_topic_macros"
+							name="min"
+							arg-topic="{$thread.Topic}"
+							arg-size="xs" />
+				</div>
+				<xf:foreach loop="$thread.additional_topics" value="$additionalTopic">
+					<div class="structItem-topicList-topic">
+						<xf:macro template="thtopics_topic_macros"
+								name="min"
+								arg-topic="{$additionalTopic}"
+								arg-size="xs" />
+					</div>
+				</xf:foreach>
+			</div>
+			<div class="structItem-topicList__spacer">
+				<div class="structItem-topicList-topic">
+					<xf:macro template="thtopics_topic_macros" name="min" arg-topic="{$thread.Topic}" arg-size="xs" />
+				</div>
+				<xf:foreach loop="$thread.additional_topics" value="$additionalTopic">
+					<div class="structItem-topicList-topic">
+						<xf:macro template="thtopics_topic_macros" name="min" arg-topic="{$additionalTopic}" arg-size="xs" />
+					</div>
+				</xf:foreach>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>

@@ -1,0 +1,1 @@
+Maximum number of thread topics selectable from same group

@@ -1,0 +1,9 @@
+{
+    "template": "find_threads_list",
+    "description": "Add widget position below thread list and in sidebar/sidenav.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "<xf:widgetpos id=\"thtopics_find_threads_below_threads\" />\n<xf:widgetpos id=\"thtopics_find_threads_sidebar\" position=\"sidebar\" context-filterBarVisible=\"{{ $xf.options.thtopics_topicFilterFindThreadsPages }}\" />\n<xf:widgetpos id=\"thtopics_find_threads_sidenav\" position=\"sidenav\" />\n\n$0"
+}

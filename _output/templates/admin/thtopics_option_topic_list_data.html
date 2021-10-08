@@ -1,0 +1,38 @@
+<xf:if is="$xf.debug">
+	<xf:set var="$formatParams" value="{$option.formatParams}" />
+
+	<xf:set var="$inputName"><xf:macro template="option_macros" name="input_name" arg-id="{$option.option_id}" /></xf:set>
+	<xf:set var="$listedHtml">
+		<xf:macro template="option_macros"
+				  name="listed_html"
+				  arg-id="{$option.option_id}" />
+	</xf:set>
+	<xf:set var="$hintHtml"><xf:trim>
+		<xf:if is="$option.canEdit()">
+			<xf:macro template="option_macros"
+					  name="option_edit_link"
+					  arg-group="{$group}"
+					  arg-option="{$option}" />
+		</xf:if>
+		<xf:if is="$includeAddOnHint AND $group AND $option.addon_id AND $option.addon_id != $group.addon_id AND $option.addon_id != 'XF'">
+			<span class="formRow-hint-featured">
+				<a href="{{ link('add-ons/options', $option.AddOn) }}">{$option.AddOn.title}</a>
+			</span>
+		</xf:if>
+	</xf:trim></xf:set>
+	<xf:set var="$explainHtml">{$option.explain}</xf:set>
+
+	<span class="u-anchorTarget" id="{$option.option_id}"></span>
+	
+	<xf:textarearow name="{$inputName}"
+					value="{$option.option_value}"
+					rows="{$formatParams.rows}"
+					autosize="true"
+					class="{$formatParams.class}">
+		<xf:label>{$option.title}</xf:label>
+		<xf:hint>{$hintHtml}</xf:hint>
+		<xf:explain>{$explainHtml}</xf:explain>
+		<xf:finalhtml>{$listedHtml}</xf:finalhtml>
+	</xf:textarearow>
+<xf:else />
+</xf:if>

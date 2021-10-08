@@ -1,0 +1,9 @@
+{
+    "template": "find_threads_list",
+    "description": "Add filter bar to find threads list.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/<xf:if is=\"\\$threads is not empty\">.*?<div class=\"block-container\">/s",
+    "replace": "$0\n\t\t\t<xf:macro name=\"filter_bar\" template=\"thtopics_find_threads_list_macros\" arg-pageSelected=\"{$pageSelected}\" arg-user=\"{$user}\" />"
+}

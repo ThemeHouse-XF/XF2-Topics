@@ -1,0 +1,1 @@
+No topics have been created, yet. <a href="{url}">Create your first topic!</a>

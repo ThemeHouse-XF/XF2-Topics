@@ -1,0 +1,97 @@
+<div class="block">
+	<div class="block-outer"><xf:trim>
+		<xf:pagenav page="{$page}"
+					perpage="{$perPage}"
+					total="{$total}"
+					link="{$pageNavLink}"
+					params="{$pageNavData}"
+					wrapperclass="block-outer-main" />
+		</xf:trim>
+		<xf:if contentcheck="true">
+			<div class="block-outer-opposite">
+				<div class="buttonGroup">
+					<xf:contentcheck>
+						<xf:if is="$extraParams.buttonMacro">
+							<xf:macro name="{$extraParams.buttonMacro}"
+									  arg-buttonData="{$extraParams.buttonData}" />
+						</xf:if>
+					</xf:contentcheck>
+				</div>
+			</div>
+		</xf:if>
+	</div>
+	<div class="block-container">
+		<xf:if is="$extraParams.filterMacro">
+			<xf:macro name="{$extraParams.filterMacro}"
+					  arg-filterData="{$extraParams.filterData}"
+					  arg-topics="{$topics}" />
+		</xf:if>
+		<div class="block-body" data-thtopic-replace="replace">
+			<div class="structItemContainer">
+				<xf:if is="$threads is not empty">
+					<div class="structItemContainer-group js-threadList">
+						<xf:foreach loop="$threads" value="$thread">
+							<xf:macro template="thread_list_macros"
+									  name="item"
+									  arg-thread="{$thread}"
+									  arg-forum="{$forum}"
+									  arg-allowInlineMod="{{ false }}"
+									  arg-allowEdit="{$thread.canEdit()}"/>
+						</xf:foreach>
+					</div>
+					<xf:else />
+					<div class="structItem js-emptyThreadList">
+						<div class="structItem-cell">{{ phrase('thtopics_there_no_threads') }}</div>
+					</div>
+				</xf:if>
+			</div>
+		</div>
+	</div>
+
+	<div class="block-outer block-outer--after">
+		<xf:pagenav
+					page="{$page}" perpage="{$perPage}" total="{$total}"
+					link="forums" data="{$forum}" params="{$filters}"
+					wrapperclass="block-outer-main" />
+	</div>
+</div>
+
+<xf:macro name="buttons_fnp"
+		  arg-buttonData="!">
+	<xf:macro template="whats_new_posts"
+			  name="buttons"
+			  arg-findNew="{$buttonData.findNew}"
+			  />
+</xf:macro>
+
+<xf:macro name="filter_fnp"
+		  arg-filterData="!">
+	<xf:macro template="whats_new_posts"
+			  name="filter_bar"
+			  arg-findNew="{$filterData.findNew}"
+			  arg-rerunData="{$filterData.findNew}"
+			  arg-rerunRoute="whats-new/posts"
+			  arg-filterRoute="whats-new/posts"
+			  />
+</xf:macro>
+
+<xf:macro name="filter_trending"
+		  arg-topics="!">
+
+	<xf:if is="$xf.visitor.user_id">
+		<div class="block-filterBar">
+			<div class="filterBar">
+				<a class="filterBar-menuTrigger"
+				   data-xf-click="menu"
+				   role="button"
+				   tabindex="0"
+				   aria-expanded="false"
+				   aria-haspopup="true">
+					{{ phrase('filters') }}
+				</a>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="assets" template="thtopics_topic_macros" />

@@ -1,0 +1,5 @@
+<xf:macro name="links" arg-pageSelected="!" arg-baseClass="!" arg-selectedClass="!">
+	<xf:if is="{$xf.options.thtopics_showNewThreadsPage}">
+		<a class="{$baseClass} {{ $pageSelected == 'thtopics_new_thread' ? {$selectedClass} : '' }}" href="{{ link('whats-new/threads') }}" rel="nofollow">{{ phrase('thtopics_new_threads') }}</a>
+	</xf:if>
+</xf:macro>

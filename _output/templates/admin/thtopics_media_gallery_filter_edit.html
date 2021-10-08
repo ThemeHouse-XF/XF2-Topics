@@ -1,0 +1,48 @@
+<xf:if is="$mediaGalleryFilter.isInsert()">
+	<xf:title>{{ phrase('thtopics_add_media_gallery_filter') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('thtopics_edit_media_gallery_filter:') }} {$mediaGalleryFilter.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$mediaGalleryFilter.isUpdate()">
+	<xf:button href="{{ link('media-gallery-filters/delete', $mediaGalleryFilter) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('media-gallery-filters/save', $mediaGalleryFilter) }}" ajax="true" class="block">
+	<div class="block-container">
+		<h2 class="block-tabHeader tabs" data-xf-init="tabs" role="tablist">
+			<a class="tabs-tab is-active" role="tab" tabindex="0" aria-controls="media-gallery-filter">{{ phrase('general_options') }}</a>
+			<a class="tabs-tab" role="tab" tabindex="0" aria-controls="author-criteria">{{ phrase('thtopics_author_criteria') }}</a>
+		</h2>
+
+		<ul class="tabPanes">
+			<li class="is-active" role="tabpanel" id="media-gallery-filter">
+				<div class="block-body">
+					<xf:textboxrow name="title"
+						value="{$mediaGalleryFilter.title}"
+						label="{{ phrase('title') }}" />
+
+					<xf:numberboxrow label="{{ phrase('display_order') }}"
+						name="display_order" min="0" value="{$mediaGalleryFilter.display_order}" />
+
+					<xf:radiorow name="style_id" value="{$mediaGalleryFilter.style_id}"
+						label="{{ phrase('thtopics_force_style') }}">
+						<xf:options source="$styleChoices" />
+					</xf:radiorow>
+					
+					<xf:checkboxrow label="{{ phrase('options') }}">
+						<xf:option name="active" selected="$mediaGalleryFilter.active"
+							label="{{ phrase('thtopics_active') }}" />
+					</xf:checkboxrow>
+				</div>
+			</li>
+			<li role="tabpanel" id="author-criteria">
+				<div class="block-body">
+					<xf:include template="helper_user_search_criteria" />
+				</div>
+			</li>
+		</ul>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>

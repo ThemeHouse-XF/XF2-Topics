@@ -1,0 +1,2 @@
+If you don't use the thread topics system, you can completely disable it but still keep the all threads and new threads pages.<br />
+Note: You will need to <a href="admin.php?topics/tools">Rebuild topics counters</a> if you are re-enabling the thread topics system and posts have been made since it was disabled.

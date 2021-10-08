@@ -1,0 +1,12 @@
+{
+    "edit_format": "radio",
+    "edit_format_params": "topic_id={{ phrase('thtopics_creation_date') }}\ntitle={{ phrase('thtopics_alphabetically') }}\ndiscussion_count={{ phrase('thtopics_discussion_count') }}\nmessage_count={{ phrase('thtopics_post_count') }}\nlast_post_date_primary={{ phrase('thtopics_last_post_date') }}\nlast_post_date={{ phrase('thtopics_last_post_date_including_additional_topics') }}",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "default_value": "topic_id",
+    "relations": {
+        "thtopics": 2000
+    }
+}

@@ -1,0 +1,2 @@
+Setting the filter to "Best match" or "Matches any" will show results where threads contain any of the selected thread topics, while setting the filter to "Matches all" will only show results where threads contain all of the selected thread topics.<br />
+"Best match" additionally orders results by the number of thread topics matched first.

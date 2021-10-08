@@ -1,0 +1,9 @@
+{
+    "template": "whats_new_posts",
+    "description": "Add widget position below thread list and in sidebar/sidenav.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "<xf:widgetpos id=\"thtopics_new_posts_below_threads\" />\n<xf:widgetpos id=\"thtopics_new_posts_sidebar\" position=\"sidebar\" context-filterBarVisible=\"{{ $xf.visitor.user_id > 0 && $xf.options.thtopics_topicFilterWhatsNewPages }}\" />\n<xf:widgetpos id=\"thtopics_new_posts_sidenav\" position=\"sidenav\" />\n$0"
+}

@@ -1,0 +1,1 @@
+The new threads page shows a list of threads recently started in the same way that the new posts page shows a list of threads recently posted in. It is still possible to set new threads as the forums default page if this is disabled.

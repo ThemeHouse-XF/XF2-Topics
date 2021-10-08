@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "topic-groups",
+    "sub_name": "",
+    "format": ":int<topic_group_id,title>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "ThemeHouse\\Topics:TopicGroup",
+    "context": "thtopics_topicGroups",
+    "action_prefix": ""
+}

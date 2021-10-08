@@ -1,0 +1,9 @@
+{
+    "template": "member_view",
+    "description": "Add thread list JavaScript to member view",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "\n<xf:js src=\"themehouse/topics/threadList.js\" min=\"themehouse/topics/threadList.min.js\" addon=\"ThemeHouse/Topics\" />"
+}

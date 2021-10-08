@@ -1,0 +1,1 @@
+This includes the new posts and new threads pages. The what's new overview page is not currently supported.

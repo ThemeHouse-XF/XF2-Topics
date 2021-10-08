@@ -1,0 +1,6 @@
+{
+    "from_class": "XFMG\\ControllerPlugin\\MediaList",
+    "to_class": "ThemeHouse\\Topics\\XFMG\\ControllerPlugin\\MediaList",
+    "execute_order": 10,
+    "active": true
+}

@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "media-gallery-filters",
+    "sub_name": "",
+    "format": ":int<media_gallery_filter_id,title>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "ThemeHouse\\Topics:MediaGalleryFilter",
+    "context": "thtopics_mediaFilters",
+    "action_prefix": ""
+}

@@ -1,0 +1,21 @@
+<mail:subject>
+	{{ phrase('thtopics_new_thread_in_watched_topic_x', {
+		'title': prefix('thread', $thread, 'escaped') . $thread.title
+	}) }}
+</mail:subject>
+
+{{ phrase('thtopics_watched_topic_thread_email_html', {
+	'receiver': $receiver.username,
+	'replier': username_link_email($post.User, $post.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
+	<div class="message">{{ bb_code_type('emailHtml', $post.message, 'post', $post) }}</div>
+</xf:if>
+
+<xf:macro template="thtopics_thread_topic_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="topics" />
+
+<xf:macro template="thtopics_thread_topic_macros" name="watched_topic_footer" arg-thread="{$thread}" arg-topic="{$topic}" />

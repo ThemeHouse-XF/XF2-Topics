@@ -1,0 +1,9 @@
+{
+    "template": "thread_view",
+    "description": "Push topic to page container.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:description",
+    "replace": "<xf:page option=\"$topic\" value=\"{$topic}\" />\n$0"
+}

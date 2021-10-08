@@ -1,0 +1,9 @@
+{
+    "template": "option_template_forumsDefaultPage",
+    "description": "Adds topic options to forums default page option",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:forumsDefaultPage:middle]-->",
+    "replace": "<xf:option value=\"thtopic_all_threads\" label=\"{{ phrase('thtopics_all_threads') }}\" />\n<xf:option value=\"thtopic_topic_list\" label=\"{{ phrase('thtopics_topic_list') }}\" disabled=\"{{ !$xf.options.thtopics_enableTopics }}\" />\n<xf:option value=\"thtopic_new_threads\" label=\"{{ phrase('thtopics_new_threads') }}\" />\n$0"
+}

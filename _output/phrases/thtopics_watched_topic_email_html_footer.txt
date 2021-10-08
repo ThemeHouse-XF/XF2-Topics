@@ -1,0 +1,5 @@
+<p class="minorText">Please do not reply to this message. You must visit the forum to reply.</p>
+
+<p class="minorText">This message was sent to you because you opted to watch the topic "{topic_title}" at {board} with email notification of new threads or messages. You will not receive any further emails about this thread until you have read the new messages.</p>
+
+<p class="minorText">If you no longer wish to receive these emails, you may <a href="{disable_this_link}">disable emails from this forum</a> or <a href="{disable_all_link}">disable all emails</a>.</p>

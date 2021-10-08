@@ -1,0 +1,43 @@
+<xf:h1>{$xf.options.boardTitle}</xf:h1>
+<xf:if is="{$xf.options.forumsDefaultPage} != 'thtopic_topic_list'">
+	<xf:title page="{$page}">{{ phrase('thtopics_topics') }}</xf:title>
+</xf:if>
+
+<xf:widgetpos id="thtopics_topic_list_sidebar" position="sidebar" />
+<xf:widgetpos id="thtopics_topic_list_sidenav" position="sidenav" />
+<xf:if is="{$xf.options.forumsDefaultPage} != 'thtopics_topic_list'">
+	<xf:widgetpos id="thuix_index_page" position="sidebar" />
+</xf:if>
+
+<xf:pageaction>
+	<xf:macro template="thtopics_topic_macros"
+			  name="post_thread"
+			  arg-topic="{$topic}" />
+</xf:pageaction>
+
+<div class="block th_topicList">
+	<div class="th_topicsSearch">
+		<input placeholder="{{phrase('thtopics_search_topics...')}}" class="input" />
+	</div>
+
+	<div class="thTopicList thTopicList--full">
+		<xf:foreach loop="$data" value="$dataEntry">
+			<xf:set var="$topic" value="{$topics.{$dataEntry->id}}" />
+			<xf:macro template="thtopics_topic_macros"
+						name="full"
+						arg-showSubTopics="{{ true }}"
+						arg-topic="{$topic}"
+						arg-topics="{$topics}"
+						arg-children="{$dataEntry->children}"
+						arg-extraClass="th_topicList__topic" />
+		</xf:foreach>
+
+		<div class="th_topics__noResults block-row">
+			{{ phrase('no_results_found') }}
+		</div>
+	</div>
+</div>
+
+<xf:js src="themehouse/topics/topicsSearch.js"
+	   min="themehouse/topics/topicsSearch.min.js"
+	   addon="ThemeHouse/Topics" />

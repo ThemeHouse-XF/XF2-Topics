@@ -1,0 +1,9 @@
+{
+    "template": "search_form_post",
+    "description": "Handle search filter option.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:formrow.*label=\"{{ phrase\\('search_in_forums'\\) }}\">.*<\\/xf:formrow>)/sU",
+    "replace": "<xf:if is=\"$topics is empty || $xf.options.thtopics_searchFilterOption != 'topic'\">\n\t$0\n</xf:if>"
+}

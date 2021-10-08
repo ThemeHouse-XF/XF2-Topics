@@ -1,0 +1,1 @@
+Setting this to zero will mean that threads can only be assigned to a maximum of one thread topic.

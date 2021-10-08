@@ -1,0 +1,1 @@
+Position inside the main content area while viewing a list of threads or sub-forums in a forum above the thread list. Widget templates rendered in this position can use the current forum entity in the <code>{$context.forum}</code> param.

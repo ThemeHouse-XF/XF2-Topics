@@ -1,0 +1,1 @@
+This includes all trending pages. Requires [TH] Trending add-on to be installed.

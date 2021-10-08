@@ -1,0 +1,13 @@
+{
+    "parent_navigation_id": "forums",
+    "display_order": 601,
+    "navigation_type_id": "basic",
+    "type_config": {
+        "link": "{{ link('topics/mark-read', '-', {'date': $xf.time}) }}",
+        "display_condition": "$xf.visitor.user_id",
+        "extra_attributes": {
+            "data-xf-click": "overlay"
+        }
+    },
+    "enabled": false
+}

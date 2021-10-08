@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\ControllerPlugin\\FindNew",
+    "to_class": "ThemeHouse\\Topics\\XF\\ControllerPlugin\\FindNew",
+    "execute_order": 1,
+    "active": true
+}

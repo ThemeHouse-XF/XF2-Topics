@@ -1,0 +1,22 @@
+<xf:title>{{ phrase('thtopics_inline_moderation_change_topics') }}</xf:title>
+
+<xf:form action="{{ link('inline-mod') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body js-prefixListenContainer">
+			<xf:macro template="thtopics_topic_chooser_macros" name="chooser"
+					  arg-selectedTopicId="{{ null }}"
+					  arg-topics="{$topics}"
+					  arg-additionalTopics="{$topics}"
+					  arg-selectedAdditionalTopicIds="{{ null }}" />
+		</div>
+
+	<xf:foreach loop="$threads" value="$thread">
+		<xf:hiddenval name="ids[]">{$thread.thread_id}</xf:hiddenval>
+	</xf:foreach>
+
+	<xf:hiddenval name="type">thread</xf:hiddenval>
+	<xf:hiddenval name="action">thtopics_changeTopics</xf:hiddenval>
+	<xf:hiddenval name="confirmed">1</xf:hiddenval>
+		<xf:submitrow icon="save" sticky="true" />
+	</div>
+</xf:form>

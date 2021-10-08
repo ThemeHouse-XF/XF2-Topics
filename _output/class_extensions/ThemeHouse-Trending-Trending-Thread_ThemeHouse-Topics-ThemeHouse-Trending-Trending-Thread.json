@@ -1,0 +1,6 @@
+{
+    "from_class": "ThemeHouse\\Trending\\Trending\\Thread",
+    "to_class": "ThemeHouse\\Topics\\ThemeHouse\\Trending\\Trending\\Thread",
+    "execute_order": 10,
+    "active": true
+}

@@ -1,0 +1,9 @@
+{
+    "template": "thtrending_trending_view_thread",
+    "description": "Adds topics to filter bar",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/<ul class=\"filterBar-filters\">.*?<xf:contentcheck>/s",
+    "replace": "$0\n\t\t\t\t\t\t\t<xf:if is=\"{$xf.options.thtopics_topicFilterTrendingPages}\">\n\t\t\t\t\t\t\t\t<xf:include template=\"thtopics_filterbar_topics\" />\n\t\t\t\t\t\t\t</xf:if>"
+}

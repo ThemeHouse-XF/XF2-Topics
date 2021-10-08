@@ -1,0 +1,9 @@
+{
+    "template": "find_threads_list",
+    "description": "Add filter bar to find threads list with no results.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"blockMessage\">{{ phrase('there_no_threads_to_display') }}</div>",
+    "replace": "<div class=\"block\">\n\t\t<div class=\"block-container\">\n\t\t\t<xf:macro name=\"filter_bar\" template=\"thtopics_find_threads_list_macros\" arg-pageSelected=\"{$pageSelected}\" arg-user=\"{$user}\" />\n\t\t\t<div class=\"block-row\">{{ phrase('there_no_threads_to_display') }}</div>\n\t\t</div>\n\t</div>"
+}

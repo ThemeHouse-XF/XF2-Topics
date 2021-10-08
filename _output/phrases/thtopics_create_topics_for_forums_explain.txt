@@ -1,0 +1,1 @@
+This rebuild process will attempt to create topics for all of your forums.

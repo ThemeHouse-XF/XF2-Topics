@@ -1,0 +1,1 @@
+This will allow you to modify the order of thread topics in lists and widgets, and in some cases, a way to collapse thread topics of child or lesser importance.

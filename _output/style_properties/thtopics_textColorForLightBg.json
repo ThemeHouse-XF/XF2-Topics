@@ -1,0 +1,13 @@
+{
+    "group_name": "thtopics",
+    "title": "Text color for light backgrounds",
+    "description": "This is the text color that will automatically be used if it is determined that you have selected a light background color",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": "#000000",
+    "display_order": 1000
+}

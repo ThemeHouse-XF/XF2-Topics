@@ -1,0 +1,9 @@
+{
+    "template": "forum_new_posts",
+    "description": "Add context to sidebar widget position.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:widgetpos id=\"forum_new_posts_sidebar\".*?)(\\s?\\/>)/s",
+    "replace": "$1 context-filterBarVisible=\"{{ $xf.visitor.user_id > 0 && $xf.options.thtopics_topicFilterWhatsNewPages }}\"$2"
+}

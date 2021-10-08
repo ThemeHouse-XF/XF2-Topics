@@ -1,0 +1,9 @@
+{
+    "template": "xfmg_media_filters",
+    "description": "Add media gallery filters.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:above_sort_by]-->",
+    "replace": "<xf:macro template=\"thtopics_xfmg_media_filters_macros\" name=\"above_sort_by\" arg-filters=\"{$filters}\" arg-mediaGalleryFilters=\"{$thtopics_mediaGalleryFilters}\" />\n\t$0"
+}

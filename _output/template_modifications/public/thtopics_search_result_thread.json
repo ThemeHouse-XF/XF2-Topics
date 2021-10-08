@@ -1,0 +1,9 @@
+{
+    "template": "search_result_thread",
+    "description": "Add topic list to search result.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<h3 class=\"contentRow-title.*>)/sU",
+    "replace": "<xf:css src=\"thtopics_structured_list.less\" />\n\t\t\t<xf:css src=\"thtopics_search_result.less\" />\n\t\t\t<xf:macro template=\"thtopics_thread_list_macros\"\n\t\t\t\tname=\"topic_list\"\n\t\t\t\targ-thread=\"{$thread}\" />\n\t\t\t$0"
+}

@@ -1,0 +1,1 @@
+Number of thread topics to show when creating new thread before showing a search box and moving remaining thread topics to an "All" menu.

@@ -1,0 +1,1 @@
+The all threads page shows a list of all threads, which can be filtered and sorted. It is still possible to set all threads as the forums default page if this is disabled.

@@ -1,0 +1,1 @@
+Allow topic filtering on what's new pages

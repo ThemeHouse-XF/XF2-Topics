@@ -1,0 +1,1 @@
+Maximum depth of topics to show in widgets before moving remaining topics to a "Show all" menu. Individual widgets can be set to show less than this depth of topics, but not more.

@@ -1,0 +1,1 @@
+This includes the your threads, threads with your posts and unanswered threads pages. The watched threads page is not currently supported.

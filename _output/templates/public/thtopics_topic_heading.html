@@ -1,0 +1,32 @@
+<xf:if is="{{ $xf.options.thtopics_enableTopics }}">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+
+	<div class="p-body-header--inner">
+		<xf:if is="($template === 'thread_view') OR ($template === 'topic_view')">
+			<ul class="thTopicHeading__container__topics">
+				<li class="thTopicHeading__container__topics__topic"><a href="{{ link('forums/all-threads', null, {'topics': $topic.title . '.' . $topic.topic_id}) }}" class="thTopic thTopic--inverted thTopic--{$topic.topic_id} {$topic.extra_class}">{$topic.title}</a></li>
+				<xf:foreach loop="$thread.additional_topics" value="$additionalTopic">
+					<li class="thTopicHeading__container__topics__topic"><a href="{{ link('forums/all-threads', null, {'topics': $additionalTopic.title . '.' . $additionalTopic.topic_id}) }}" class="thTopic--additional {$topic.extra_class}">{$additionalTopic.title}</a></li>
+				</xf:foreach>
+			</ul>
+			<xf:if is="!$resourceThread">
+				<div class="p-title">
+					<h1 class="p-title-value">{{ prefix('thread', $thread) }}{$thread.title}</h1>
+					<xf:if contentcheck="true">
+						<div class="p-title-pageAction"><xf:contentcheck><xf:pageaction /></xf:contentcheck></div>
+					</xf:if>
+				</div>
+				<div class="p-description">{$description}</div>
+			</xf:if>
+		<xf:else />
+			<div class="p-title">
+				<h1 class="p-title-value">{$topic.title}</h1>
+				<xf:if contentcheck="true">
+					<div class="p-title-pageAction"><xf:contentcheck><xf:pageaction /></xf:contentcheck></div>
+				</xf:if>
+			</div>
+			<div class="p-description">{$topic.description}</div>
+		</xf:if>
+	</div>
+</xf:if>

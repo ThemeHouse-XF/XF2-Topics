@@ -1,0 +1,11 @@
+{
+    "parent_navigation_id": "forums",
+    "display_order": 10,
+    "navigation_type_id": "basic",
+    "type_config": {
+        "link": "{{ link('forums/all-threads') }}",
+        "display_condition": "{$xf.options.thtopics_showAllThreadsPage} && {$xf.options.forumsDefaultPage} != 'thtopic_all_threads'",
+        "extra_attributes": []
+    },
+    "enabled": true
+}

@@ -1,0 +1,9 @@
+<xf:selectrow name="criteria[topic_id]" value="{$criteria.topic_id}" multiple="true"
+	label="{{ phrase('thtopics_topic') }}">
+
+	<xf:option value="-1" label="{{ phrase('(any)') }}" />
+	<xf:option value="0" label="{{ phrase('(thtopics_no_topic)') }}" />
+	<xf:foreach loop="$topics" value="$topic">
+		<xf:option value="{$topic.topic_id}">{$topic.title}</xf:option>
+	</xf:foreach>
+</xf:selectrow>

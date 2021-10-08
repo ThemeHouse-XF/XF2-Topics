@@ -1,0 +1,1 @@
+This will show a thread topics widget if thread topics is enabled and there is at least one thread topic in <a href="admin.php?topics/layout">Layout</a>. Otherwise, this will show a node topics widget.

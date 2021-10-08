@@ -1,0 +1,22 @@
+<xf:title>{{ phrase('post_thread_in') }}</xf:title>
+
+<xf:css src="thtopics.less" />
+<xf:css src="thtopics_topic_cache.less" />
+
+<xf:form action="{{ link('topics/create-thread') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:hiddenval name="draft_node_id" value="{$draftNodeId}" />
+			<xf:macro template="thtopics_topic_chooser_macros"
+					  name="chooser"
+					  arg-selectedTopicId="{$selectedTopicId}"
+					  arg-topics="{$topics}"
+					  arg-additionalTopics="{$topics}"
+					  arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}" />
+
+			<div class="thTopicChooserSubmit" style="{{ $selectedTopicId ? '' : 'display: none' }}">
+				<xf:submitrow icon="write" submit="{{ phrase('continue') }}" />
+			</div>
+		</div>
+	</div>
+</xf:form>

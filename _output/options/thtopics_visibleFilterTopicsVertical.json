@@ -1,0 +1,12 @@
+{
+    "edit_format": "spinbox",
+    "edit_format_params": "min=1\nmax=55",
+    "data_type": "positive_integer",
+    "sub_options": [],
+    "validation_class": "XF\\Option\\Style",
+    "validation_method": "triggerStyleUpdate",
+    "default_value": "10",
+    "relations": {
+        "thtopics": 110
+    }
+}

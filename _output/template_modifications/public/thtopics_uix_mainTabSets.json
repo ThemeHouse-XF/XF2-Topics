@@ -1,0 +1,9 @@
+{
+    "template": "uix_mainTabSets",
+    "description": "Adds the topic tab to the UI.X topic bar. (Note: only applicable in the UI.X Framework)",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!-- new tab -->",
+    "replace": "$0\n<xf:include template=\"thtopics_uix_mainTabSets\" />"
+}

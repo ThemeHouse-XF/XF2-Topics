@@ -1,0 +1,9 @@
+{
+    "template": "helper_thread_search_criteria",
+    "description": "Add topics options to thread search criteria.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:textboxrow name=\"criteria[username]\"",
+    "replace": "<xf:include template=\"thtopics_helper_thread_search_criteria\" />\n\n$0"
+}

@@ -1,0 +1,117 @@
+.formRow.formRow--thTopics {
+	&.formRow--topicSelected {
+		display: none;
+	}
+	&.formRow--additionalTopics {
+		display: none;
+		&.formRow--topicSelected {
+			display: inherit;
+		}
+	}
+}
+
+.thTopic__createThreadBar {
+	display: flex;
+	padding-bottom: 0;
+
+	&.formInfoRow--noPadding {
+		margin-top: 3px;
+	}
+}
+
+.thTopic__createThreadBar__topics {
+	display: flex;
+	flex-grow: 1;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.thTopic__createThreadBar__topics--plus {
+	font-weight: 400;
+}
+
+.thTopicList__topic--active {
+	.thTopic--additional {
+		background: xf-intensify(@xf-thtopics_secondaryTopic--color, 75%);
+	}
+}
+
+.thTopicList {
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+
+	.top-filter-item {flex: 0 0 150px;}
+}
+
+.th_topics__noResults {
+	padding-bottom: 12px;
+	padding-top: 11px !important;
+}
+
+.th_allTopics {
+	display: none;
+}
+
+.overlay {
+	.th_allTopics {display: block;}
+	.th_topicsSearch {margin: 0;}
+	.th_topics .th_allTopics {display: none;}
+	.thTopicList__topic--child {flex: 0 0 150px;}
+
+	.th_topicsAdditional .thTopicChooser .topic-filter-item {
+		display: inline-block;
+	}
+
+	.thTopicList--min.thTopicChooser .thTopic,
+	.thTopicChooser.thTopicList .topic-filter-item {
+		margin: 0;
+		padding: 8px 8px 0;
+		flex: 0 0 150px;
+	}
+}
+
+.thTopic__description {
+ 	padding: 8px 0;
+}
+
+.formRow--thTopics.th_topicsSearch--filtered .thTopicChooser {
+	.topic-filter-item {
+		display: inline-flex;
+	}
+
+	.topic-filter-item.th_topicsSearch--hide {
+		display: none;
+	}
+}
+
+.formRow--thTopics {
+	.block-rowMessage {
+		transition: background 0.2s ease, color 0.2s ease, border-left 0.2s ease;
+	}
+	.thTopicChooser {
+		.topic-filter-item {
+			display: none;
+		}
+		.topic-filter-item.topic-filter-item--active {
+			display: inline-flex;
+		}
+	}
+	.thTopicChooser__all .topic-filter-item {
+		display: inline-flex;
+	}
+	@i: {$xf.options.thtopics_visibleTopicsNewThread};
+	.topic-visible-filters-@{i} {
+		.topic-filter-item:nth-child(-n+@{i}) {
+		display: inline-flex;
+		}
+	}
+}
+
+.th_allTopicsTrigger.button {
+	margin-left: 5px;
+	.button-text {
+		vertical-align: middle;
+	}
+}

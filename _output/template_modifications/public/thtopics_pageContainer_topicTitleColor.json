@@ -1,0 +1,9 @@
+{
+    "template": "PAGE_CONTAINER",
+    "description": "thTopic--{$topic.topic_id}",
+    "execution_order": 99,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "p-body-header",
+    "replace": "$0 {{$topic.topic_id ? 'no-hover thTopic--header thTopic--' . $topic.topic_id : ''}}"
+}

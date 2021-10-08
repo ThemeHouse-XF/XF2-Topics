@@ -1,0 +1,1 @@
+Text color for dark backgrounds

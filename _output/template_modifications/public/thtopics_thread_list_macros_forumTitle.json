@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "Remove forum title from thread list item",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<ul class=\\\"structItem-parts\\\">.*?<xf:if is=\\\"\\!\\$forum)(\\\">.*?<\\/xf:if>)/s",
+    "replace": "$1 && (!$xf.options.thtopics_enableTopics || !$thread.topics)$2"
+}

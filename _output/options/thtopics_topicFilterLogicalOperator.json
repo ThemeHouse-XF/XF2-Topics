@@ -1,0 +1,12 @@
+{
+    "edit_format": "select",
+    "edit_format_params": "andxor={{ phrase('thtopics_best_match') }}\nand={{ phrase('thtopics_matches_all') }}\nor={{ phrase('thtopics_matches_any') }}",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "default_value": "andxor",
+    "relations": {
+        "thtopics": 4000
+    }
+}

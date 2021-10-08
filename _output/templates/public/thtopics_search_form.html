@@ -1,0 +1,15 @@
+<xf:macro name="search_post" arg-topics="!">
+	<xf:formrow rowtype="input"
+				label="{{ phrase('thtopics_search_in_topics') }}">
+		<ul class="inputList">
+			<li>
+				<xf:select name="c[topics][]" size="7" multiple="multiple" value="{$input.c.topics|default([0])}">
+					<xf:option value="">({{ phrase('any') }})</xf:option>
+					<xf:foreach loop="{$topics}" value="$topic">
+						<xf:option value="{$topic.topic_id}">{$topic.title}</xf:option>
+					</xf:foreach>
+				</xf:select>
+			</li>
+		</ul>
+	</xf:formrow>
+</xf:macro>

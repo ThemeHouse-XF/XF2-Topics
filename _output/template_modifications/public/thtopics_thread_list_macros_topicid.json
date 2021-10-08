@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "Adds topic ID to create thread URL",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:macro name=\\\"quick_thread\\\")(.*<xf:set var=\\\"\\$inlineMode\\\".* \\/>)(.*data-focus-activate-href=\\\"{{ link\\('forums\\/post-thread', \\$forum, {'inline-mode': true)/s",
+    "replace": "$1\n\targ-topic=\"\"$2\n\t\t<xf:set var=\"$topicId\" value=\"{{ ($topic ? $topic.topic_id : '') }}\" />$3, 'topic_id': $topicId"
+}

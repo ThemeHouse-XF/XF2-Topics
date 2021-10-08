@@ -1,0 +1,1 @@
+If this is selected and there is at least one thread topic in <a href="admin.php?topics/layout">Layout</a>, the default "Post New Thread" button on the forum list will allow users to select a thread topic instead of a forum.

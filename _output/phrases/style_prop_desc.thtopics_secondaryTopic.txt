@@ -1,0 +1,1 @@
+Note: this will inherit from the base topic styling, so there is no need to duplicate styling here.

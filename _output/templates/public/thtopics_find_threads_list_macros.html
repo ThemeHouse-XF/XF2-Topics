@@ -1,0 +1,46 @@
+<xf:macro name="filter_bar" arg-pageSelected="!">
+	<xf:if is="{$xf.options.thtopics_topicFilterFindThreadsPages}">
+		<div class="block-filterBar">
+			<div class="filterBar">
+				<xf:if contentcheck="true">
+					<ul class="filterBar-filters">
+						<xf:contentcheck>
+							<xf:include template="thtopics_filterbar_topics" />
+						</xf:contentcheck>
+					</ul>
+				</xf:if>
+
+				<a class="filterBar-menuTrigger" data-xf-click="menu" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true">{{ phrase('filters') }}</a>
+				<xf:macro name="filter_menu" arg-pageSelected="{$pageSelected}" />
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="filter_menu" arg-pageSelected="!">
+	<div class="menu" data-menu="menu" aria-hidden="true">
+		<div class="menu-content">
+			<h4 class="menu-header">{{ phrase('show_only:') }}</h4>
+			<xf:form action="{{ link('find-threads') }}">
+				<div class="menu-row">
+					<xf:radio name="type" value="{{ $pageSelected ?: 'unanswered' }}">
+						<xf:option value="started">{{ phrase('threads_started_by_x', {'username': $xf.visitor.username}) }}</xf:option>
+						<xf:option value="contributed">{{ phrase('threads_with_posts_by_x', {'username': $xf.visitor.username}) }}</xf:option>
+						<xf:option value="unanswered">{{ phrase('threads_with_no_replies') }}</xf:option>
+					</xf:radio>
+				</div>
+
+				<xf:macro name="filter_footer" />
+			</xf:form>
+		</div>
+	</div>
+</xf:macro>
+
+<xf:macro name="filter_footer">
+	<hr class="menu-separator" />
+	<div class="menu-footer">
+		<span class="menu-footer-controls">
+			<xf:button type="submit" class="button--primary">{{ phrase('filter') }}</xf:button>
+		</span>
+	</div>
+</xf:macro>

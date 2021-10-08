@@ -1,0 +1,11 @@
+{
+    "parent_navigation_id": "forums",
+    "display_order": 99,
+    "navigation_type_id": "basic",
+    "type_config": {
+        "link": "{{ link('whats-new/threads') }}",
+        "display_condition": "{$xf.options.thtopics_showNewThreadsPage} && {$xf.options.forumsDefaultPage} != 'thtopic_new_threads'",
+        "extra_attributes": []
+    },
+    "enabled": true
+}

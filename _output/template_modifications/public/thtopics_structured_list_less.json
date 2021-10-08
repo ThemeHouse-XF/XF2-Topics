@@ -1,0 +1,9 @@
+{
+    "template": "structured_list.less",
+    "description": "Add additional CSS to structured list.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/x",
+    "replace": "$0\n\n<xf:include template=\"thtopics_structured_list.less\" />"
+}

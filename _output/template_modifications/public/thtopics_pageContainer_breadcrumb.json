@@ -1,0 +1,9 @@
+{
+    "template": "PAGE_CONTAINER",
+    "description": "Removes breadcrumb when necessary",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/<xf:macro name=\"breadcrumbs\"$.*? \\/>/sm",
+    "replace": "<xf:if is=\"!$thtopics_hideBreadcrumb\">\n$0\n</xf:if>"
+}

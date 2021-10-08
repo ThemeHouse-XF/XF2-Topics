@@ -1,0 +1,9 @@
+{
+    "additional_files": [
+        "src/addons/ThemeHouse/Core/Util/Color.php",
+        "src/addons/ThemeHouse/Core/Util/Color",
+        "js/themehouse/topics"
+    ],
+
+    "minify": "*"
+}

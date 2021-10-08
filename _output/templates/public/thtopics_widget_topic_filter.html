@@ -1,0 +1,64 @@
+<xf:if is="$data is not empty">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<xf:css src="thtopics_widget_topic_filter.less" />
+	<xf:css src="thtopics_topic_scroller.less" />
+	<xf:js src="themehouse/topics/filter.js"
+		min="themehouse/topics/filter.min.js"
+		addon="ThemeHouse/Topics" />
+	<div class="{{ $responsive ? 'topic-filter-responsive' : '' }}"{{ widget_data($widget) }}
+		data-topic-type="{$type}" data-style="{$style}" style="display: none;">
+		<div class="topic-filter-container{{ $multiSelect ? '' : ' topic-filter-disableMultiSelect' }}" data-max-depth="{$maxDepth}">
+			<xf:macro name="body" arg-data="{$data}" arg-filters="{$filters}" arg-filterKey="{$filterKey}" arg-type="{$type}"
+				arg-visibleFilterTopics="{$visibleFilterTopics}"
+				arg-visibleFilterTopicsVertical="{$visibleFilterTopicsVertical}" />
+			<xf:macro name="footer" arg-allTopicsLink="{$allTopicsLink}" />
+		</div>
+	</div>
+</xf:if>
+
+<xf:macro name="body" arg-data="!" arg-visibleFilterTopics="!" arg-visibleFilterTopicsVertical="!" arg-filters="!" arg-filterKey="!" arg-type="!">
+	<div class="topic-filter-body topic-visible-filters-{$visibleFilterTopics} topic-visible-filters-vertical-{$visibleFilterTopicsVertical}">
+		<div>
+			<xf:foreach loop="$data" value="$dataEntry">
+				<xf:macro name="item" arg-dataEntry="{$dataEntry}" arg-filters="{$filters}" arg-filterKey="{$filterKey}" arg-type="{$type}"/>
+			</xf:foreach>
+		</div>
+	</div>
+</xf:macro>
+
+<xf:macro name="item" arg-dataEntry="!" arg-filters="!" arg-filterKey="!" arg-type="!" arg-parentTopicId="" arg-parentTopics="" arg-depth="{{ 0 }}">
+	<xf:set var="$topicId" value="{$dataEntry.id}" />
+  	<a class="topic-filter-item topic-filter-item--{$type} topic-filter-item--depth{$depth} {{ in_array($topicId, $filters) ? ' topic-filter-item--active' : '' }}{{ ($parentTopicId && in_array($parentTopicId, $filters)) ? ' topic-filter-item--parentActive' : '' }}{{ $dataEntry.children ? ' topic-filter-item--hasChildren' : '' }}"
+		href="{{ link('forums/all-threads', null, {"{$filterKey}": $parentTopics . $topicId}) }}"
+		style="display:none;" data-parent-topic-id="{$parentTopicId}"
+		data-topic-id="{$topicId}" data-topic-type="{$type}"><i class="thTopicAction--remove thTopicAction"
+			data-topic-id="{$topicId}" {$extra|raw}></i><i class="thTopicAction--add thTopicAction"
+				data-topic-id="{$topicId}" {$extra|raw}></i><span class="thTopic--title"></span></a>
+	<xf:if is="$dataEntry.children is not empty">
+		<xf:foreach loop="{$dataEntry.children}" value="$childEntry">
+			<xf:macro name="item"
+				arg-dataEntry="{$childEntry}"
+				arg-filters="{$filters}"
+				arg-filterKey="{$filterKey}"
+				arg-type="{$type}"
+				arg-parentTopicId="{$topicId}"
+				arg-parentTopics="{{ $type === 'thread' ? "{$topicId}," : '' }}"
+				arg-depth="{{ $depth + 1 }}"/>
+		</xf:foreach>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="footer"
+	arg-allTopicsLink="!"
+	arg-allTopicsLabel="{{ phrase('thtopics_show_all') }}"
+	arg-clearTopicsLabel="{{ phrase('thtopics_clear') }}">
+	<div class="topic-filter-footer">
+		<a class="th_topicsAllTrigger" data-xf-click="overlay" href="{$allTopicsLink}">
+			<span>
+				{$allTopicsLabel}
+			</span>
+		</a>
+		<a href="#" class="th_topics_clearTopics">{$clearTopicsLabel}</a>
+	</div>
+</xf:macro>

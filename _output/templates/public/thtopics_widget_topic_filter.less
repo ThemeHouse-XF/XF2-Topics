@@ -1,0 +1,140 @@
+.thTopic--title {
+	color: inherit;
+}
+
+.thTopicChooser.thTopicList .topic-filter-item {
+	color: @xf-textColorMuted;
+
+	&:hover {
+		background: transparent !important;
+	}
+
+	.thTopic__title {
+		font-weight: normal;
+		font-size: inherit;
+	}
+}
+
+.topic-filter-scroller {
+	.th_topicsAllTrigger,
+	.th_topics_clearTopics,
+	.topic-filter-item {
+		padding: 8px;
+		margin-left: 0 !important;
+	}
+}
+
+.th_topics__noResults {
+	display: none;
+	padding-top: 10px;
+
+	.th_topics--noResults & {
+		display: block;
+	}
+}
+
+
+.p-body-sidebar,
+.p-body-sideNav,
+.uix_sidebarNav {
+	.topic-filter-item {
+		display: block;
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}
+
+.topic-filter-simple {
+	.block-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&:before, &:after {display: none;}
+
+		a {
+			padding: 0;
+
+			&:not(:hover) {
+				color: @xf-textColorMuted;
+			}
+		}
+	}
+
+	.block-body {
+		a.topic-filter-item {
+			display: none;
+		}
+		a.topic-filter-item.topic-filter-item--active {
+			display: block;
+		}
+	}
+
+	@iterations: {$xf.options.thtopics_visibleFilterTopicsVertical};
+	.topic-visible-filters-vertical-loop (@i) when (@i > 0) {
+		.topic-visible-filters-vertical-@{i} {
+			a.topic-filter-item:nth-of-type(-n+@{i}) {
+				&[data-parent-topic-id=""] {
+					display: block;
+				}
+				&.topic-filter-item--node {
+					display: block;
+				}
+				&.topic-filter-item--parentActive {
+					display: block;
+				}
+			}
+		}
+		.topic-visible-filters-vertical-loop(@i - 1);
+	}
+	.topic-visible-filters-vertical-loop (@iterations);
+}
+
+@maxi: 10;
+.i-loop (@i) when (@i > 0) {
+
+	.topic-filter-item--depth@{i} {
+		padding-left: (10px + @i * 24px) !important;
+	}
+
+	@maxj: @i;
+	.j-loop (@j) when (@j <= @maxj) {
+
+		.topic-filter-container[data-max-depth="@{j}"] .topic-filter-item--depth@{i} {
+			display: none !important;
+		}
+
+		.j-loop(@j + 1);
+	}
+	.j-loop (@maxj) {}
+	.j-loop(1);
+
+	.i-loop(@i - 1);
+}
+.i-loop (0) {}
+.i-loop(@maxi);0
+
+.topic-filter-scroller .topic-filter-item .thTopicAction {
+	position: relative;
+	z-index: 2;
+	&:after {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		top: -6px;
+		bottom: -6px;
+		left: -6px;
+		right: -12px;
+	}
+}
+
+@media (max-width: @xf-th_breakpointShowTopicScroller) {
+	.has-horizontalscrollertopics .topic-filter-responsive .topic-filter-container:not(.topic-filter-scroller) {
+		display: none;
+	}
+	.has-horizontalscrollertopics .offCanvasMenu .topic-filter-responsive .topic-filter-container:not(.topic-filter-scroller) {
+		display: flex;
+	}
+}

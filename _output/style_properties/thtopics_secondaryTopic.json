@@ -1,0 +1,26 @@
+{
+    "group_name": "thtopics",
+    "title": "Additional topic styling",
+    "description": "Note: this will inherit from the base topic styling, so there is no need to duplicate styling here.",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "border_width_simple",
+        "border_color_simple",
+        "border_radius_simple",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "color": "@xf-thtopics_textColorForDarkBg",
+        "background-color": "#9E9E9E"
+    },
+    "display_order": 30
+}

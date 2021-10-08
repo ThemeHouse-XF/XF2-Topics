@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Search\\Data\\Post",
+    "to_class": "ThemeHouse\\Topics\\XF\\Search\\Data\\Post",
+    "execute_order": 10,
+    "active": true
+}

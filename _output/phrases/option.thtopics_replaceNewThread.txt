@@ -1,0 +1,1 @@
+Replace new thread modal with thread topics modal

@@ -1,0 +1,23 @@
+{
+    "admin_media-gallery-filters_.json": {
+        "hash": "aad17c74601f18e32ceea6f822701d36"
+    },
+    "admin_topic-groups_.json": {
+        "hash": "9fe9f7caad1c798077c9595306833bfc"
+    },
+    "admin_topics_.json": {
+        "hash": "c806d4de29625994a87d6ef2365de2a8"
+    },
+    "admin_topics_layout.json": {
+        "hash": "220d10cb6d34c9208aacb9a53933adf1"
+    },
+    "public_forums_new-threads.json": {
+        "hash": "08f81cc6bedb3cd05b50dbdec72211e2"
+    },
+    "public_topics_.json": {
+        "hash": "bf7932682ffe25adccca69877722452c"
+    },
+    "public_whats-new_threads.json": {
+        "hash": "d65eb7da30619b2303b7f0cbfec0c7af"
+    }
+}

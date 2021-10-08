@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "whats-new",
+    "sub_name": "threads",
+    "format": "threads/:int<find_new_id>/:page",
+    "build_class": "",
+    "build_method": "",
+    "controller": "ThemeHouse\\Topics:WhatsNewThread",
+    "context": "forums",
+    "action_prefix": ""
+}

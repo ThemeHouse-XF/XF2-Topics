@@ -1,0 +1,182 @@
+.topicsLayoutContainer.block-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  div, h2 {
+    flex: 1 0 50%;
+
+    .block-row,
+    .js-EvalContainer,
+    .ol.dd-list {
+      height: 100%;
+    }
+  }
+}
+
+.dd {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  list-style: none;
+  font-size: 13px;
+  line-height: 20px;
+  &.topicsLayout {
+    padding-right: 10px;
+  }
+}
+
+.dd-list {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .thTopic.dd-handle {
+    display: block;
+    padding: 6px 8px;
+    margin: 5px 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}
+
+.dd-list .dd-list {
+  padding-left: 30px;
+}
+
+.dd-item,
+.dd-empty,
+.dd-placeholder {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.dd-expand {
+  display: none;
+}
+
+.dd-collapsed .dd-list,
+.dd-collapsed .dd-collapse {
+  display: none;
+}
+
+.dd-collapsed .dd-expand {
+  display: block;
+}
+
+.dd-empty,
+.dd-placeholder {
+  margin: 5px 0;
+  padding: 0;
+  min-height: 30px;
+  background: #f2fbff;
+  border: 1px dashed #b6bcbf;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.dd-empty {
+  border: 1px dashed #bbb;
+  min-height: 100px;
+  background-color: #e5e5e5;
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  display: none;
+}
+
+.dd-dragel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.dd-dragel > .dd-item .dd-handle {
+  margin-top: 0;
+}
+
+.dd-dragel .dd-handle {
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dd-nochildren .dd-placeholder {
+  display: none;
+}
+
+.dd-item > button {
+  display: none;
+}
+
+.suspenser-list .dd-item span {
+  cursor: pointer;
+}
+
+.dd-remove {
+  position: absolute;
+  right: -20px;
+  top: 1px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.dd-dragel {
+  .dd-remove {
+    display: none;
+  }
+  .topicsLayout--visibleFilterTopics,
+  .topicsLayout--visibleFilterTopicsVertical,
+  .topicsLayout--visibleFilterTopicsWidget {
+    border-top: none;
+    &:before {
+      display : none;
+    }
+  }
+}
+
+.topicsLayout--visibleFilterTopics,
+.topicsLayout--visibleFilterTopicsVertical,
+.topicsLayout--visibleFilterTopicsWidget {
+  border-top: 15px solid transparent;
+  &:before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -20px;
+    top: -15px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 15px;
+    color: #fff;
+    background-color: #999;
+    border-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dd-remove {
+    top: 6px;
+  }
+  .dd-list {
+    .dd-remove {
+      top: 1px;
+    }
+  }
+}
+
+.dd-list .dd-list {
+  .topicsLayout--visibleFilterTopics,
+  .topicsLayout--visibleFilterTopicsVertical,
+  .topicsLayout--visibleFilterTopicsWidget {
+    &:before {
+      left: -35px;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Enabling this option will hide all simple vertical widgets on mobile devices if a horizontal scroller is visible, and hide all horizontal scrollers on non-mobile devices if a simple vertical widget is visible. The viewport width at which a device is considered to be mobile can be set in <a href="admin.php?style-properties">Style properties</a>.

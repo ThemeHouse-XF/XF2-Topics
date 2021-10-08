@@ -1,0 +1,42 @@
+<xf:title>{{ phrase('thtopics_all_topics') }}</xf:title>
+
+<xf:js src="themehouse/topics/topicsSearch.js"
+	min="themehouse/topics/topicsSearch.min.js"
+	addon="ThemeHouse/Topics" />
+<xf:css src="thtopics.less" />
+<xf:css src="thtopics_topic_cache.less" />
+<xf:css src="thtopics_widget_topic_filter.less" />
+
+<div data-topic-type="node">
+	<div class="th_topics th_topicsAll topic-filter-container">
+		<div class="th_topicsSearch">
+			<input placeholder="{{ phrase('thtopics_search_topics...') }}" class="input" />
+		</div>
+
+		<div class="thTopicList thTopicList--full topic-filter-grid">
+			<xf:foreach loop="$nodeTree->getFlattened(0)" value="$treeEntry">
+				<xf:macro name="topic_display" arg-treeEntry="{$treeEntry}" />
+			</xf:foreach>
+
+			<div class="th_topics__noResults block-row">
+				{{ phrase('no_results_found') }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<xf:macro name="topic_display" arg-treeEntry="!">
+	<xf:if is="$treeEntry.record.node_type_id === 'Forum'">
+	<a class="topic-filter-item topic-filter-item--node {{ in_array($treeEntry.record.node_id, {$xf.visitor.getForumFilters()}) ? 'topic-filter-item--active' : '' }}"
+		href="{{ link('forums/all-threads', null, {'forums': $treeEntry.record.node_id}) }}"
+		data-topic-id="{$treeEntry.record.node_id}"
+		data-parent-topic-id="{$treeEntry.record.parent_node_id}"
+		data-topic-title="{$treeEntry.record.title}">
+		<i class="thTopicAction--remove thTopicAction" data-topic-id="{$treeEntry.record.node_id}">
+		</i>
+		<i class="thTopicAction--add thTopicAction" data-topic-id="{$treeEntry.record.node_id}">
+		</i>
+		<span class="thTopic--title">{$treeEntry.record.title}</span>
+	</a>
+	</xf:if>
+</xf:macro>

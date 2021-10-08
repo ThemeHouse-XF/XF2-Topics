@@ -1,0 +1,20 @@
+{
+    "group_name": "thtopics_threadList",
+    "title": "Topic scroller",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "background",
+        "border",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "background-color": "transparent"
+    },
+    "display_order": 0
+}

@@ -1,0 +1,2 @@
+It will only be possible to select a maximum of this number of thread topics from each thread topic group.<br />
+Thread topics that are not within a thread topic group will be unaffected.

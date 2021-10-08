@@ -1,0 +1,9 @@
+{
+    "template": "forum_view",
+    "description": "Add widget position above thread list.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:ad position=\"forum_view_above_thread_list\" arg-forum=\"{$forum}\" />",
+    "replace": "$0\n<xf:widgetpos id=\"thtopics_forum_view_above_threads\" context-forum=\"{$forum}\" />"
+}

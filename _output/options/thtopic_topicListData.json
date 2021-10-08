@@ -1,0 +1,12 @@
+{
+    "edit_format": "template",
+    "edit_format_params": "thtopics_option_topic_list_data",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "default_value": "[]",
+    "relations": {
+        "thtopics": 999999
+    }
+}

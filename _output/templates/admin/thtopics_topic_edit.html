@@ -1,0 +1,69 @@
+<xf:if is="$topic.isInsert()">
+	<xf:title>{{ phrase('thtopics_add_thread_topic') }}</xf:title>
+	<xf:else />
+	<xf:title>{{ phrase('thtopics_edit_thread_topic:') }} {$topic.title}</xf:title>
+</xf:if>
+
+<xf:if is="$topic.isUpdate()">
+	<xf:breadcrumb href="{{ link('topics/edit', $topic) }}">{$topic.title}</xf:breadcrumb>
+
+	<xf:pageaction>
+		<xf:button href="{{ link('topics/delete', $topic) }}">{{ phrase('thtopics_delete_topic') }}</xf:button>
+	</xf:pageaction>
+</xf:if>
+
+<xf:form action="{{ link('topics/save', $topic) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title"
+						   maxlength="{{ max_length($topic, 'title') }}"
+						   value="{$topic.title}"
+						   label="{{ phrase('title') }}" />
+
+			<xf:textarearow name="description" value="{$topic.description}" autosize="true"
+						   placeholder="{$topic.Forum.description}"
+						   label="{{ phrase('description') }}"
+						   hint="{{ phrase('you_may_use_html') }}"
+						   explain="{{ phrase('node_description_explain') }}" />
+
+			<xf:selectrow name="node_id"
+						  value="{$topic.node_id}"
+						  label="{{ phrase('thtopics_associated_forum') }}"
+						  explain="{{ phrase('thtopics_associated_forum_explain') }}">
+				<xf:foreach loop="$nodeOptions" value="$nodeOption">
+					<xf:option value="{$nodeOption.value}" disabled="{$nodeOption.disabled}">
+						{$nodeOption.label}
+					</xf:option>
+				</xf:foreach>
+			</xf:selectrow>
+
+			<xf:selectrow name="topic_group_id"
+							value="{$topic.topic_group_id}"
+							label="{{ phrase('thtopics_topic_group') }}"
+							explain="{{ phrase('thtopics_topic_group_explain', {'max': $xf.options.thtopics_groupMultiSelect}) }}">
+				<xf:foreach loop="$topicGroupOptions" value="$topicGroupOption">
+					<xf:option value="{$topicGroupOption.value}">
+						{$topicGroupOption.label}
+					</xf:option>
+				</xf:foreach>
+			</xf:selectrow>
+
+			<xf:checkboxrow name="additional_selectable"
+							value="{$topic.additional_selectable}"
+							explain="{{ phrase('thtopics_is_additional_selectable_explain') }}">
+				<xf:option value="1">{{ phrase('thtopics_is_additional_selectable') }}</xf:option>
+			</xf:checkboxrow>
+
+			<xf:macro template="thtopics_input_macros" name="color_picker"
+					  arg-name="background_color"
+					  arg-value="{$topic.background_color}"
+					  arg-label="{{ phrase('thtopics_background_color') }}" />
+
+			<xf:textboxrow name="extra_class" value="{$topic.extra_class}"
+						   label="{{ phrase('thtopics_additional_classes') }}"
+						   maxlength="{{ max_length($topic, 'extra_class') }}" />
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>

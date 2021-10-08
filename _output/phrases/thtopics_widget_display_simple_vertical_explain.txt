@@ -1,0 +1,1 @@
+A simple vertical view, designed for narrow spaces such as sidebars.

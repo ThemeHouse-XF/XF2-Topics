@@ -1,0 +1,2 @@
+If this option is enabled and there is at least one thread topic in <a href="admin.php?topics/layout">Layout</a>, we will redirect the forum list to the thread topic list.<br/>
+Doing this will completely replace the default XenForo forum list and forum view which may break some add-ons or partially remove functionality from some add-ons that interact with the forum list. This should only be done if all threads are assigned to at least one thread topic.

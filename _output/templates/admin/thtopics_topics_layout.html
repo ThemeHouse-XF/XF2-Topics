@@ -1,0 +1,135 @@
+<xf:css src="public:nestable.less" />
+<xf:js src="vendor/nestable/jquery.nestable.js" />
+<xf:js src="themehouse/topics/topicsLayout.js" min="themehouse/topics/topicsLayout.min.js" addon="ThemeHouse/Topics" />
+<xf:css src="public:thtopics.less" />
+<xf:css src="public:thtopics_topic_cache.less" />
+<xf:css src="thtopics_topics_layout.less" />
+
+<xf:title>{{ phrase('thtopics_thread_topics_layout') }}</xf:title>
+<xf:description>{{ phrase('thtopics_thread_topics_layout_desc') }}</xf:description>
+
+<xf:form class="block" action="{{ link('topics/layout') }}">
+	<div class="topicsLayoutContainer block-container">
+		<h2 class="block-header">
+			{{ phrase('thtopics_active_topics') }}
+		</h2>
+		<h2 class="block-header">
+			{{ phrase('thtopics_available_topics') }}
+		</h2>
+		<div class="block-body">
+			<div class="block-row">
+				<div class="topicsLayout js-EvalContainer dd" data-widget-limits="{$widgetLimits}">
+					<ol class="dd-list">
+						<xf:foreach loop="$data" value="$dataEntry">
+							<xf:macro name="data_entry"
+									  arg-dataEntry="{$dataEntry}"
+									  arg-topics="{$topics}" />
+						</xf:foreach>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<xf:if contentcheck="true">
+			<div class="block-body">
+				<div class="block-row">
+					<div class="suspenser-list">
+						<ol class="dd-list">
+							<xf:contentcheck>
+								<xf:foreach loop="$topics" value="$topic">
+									<li data-id="{$topic.topic_id}" class="dd-item">
+										<span class="thTopic thTopic--{$topic.topic_id} dd-handle">
+											<i class="fa fa-plus"></i>
+											{$topic.title}
+										</span>
+									</li>
+								</xf:foreach>
+							</xf:contentcheck>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<xf:else />
+			<div class="block-row">
+				{{ phrase('thtopics_no_topics_yet', {'url': link('topics/add')}) }}
+			</div>
+		</xf:if>
+
+		<input type="hidden" name="value" id="value" value="{$xf.options.thtopic_topicListData}">
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>
+
+<style>
+	.topicsLayout--visibleFilterTopicsWidget:before {
+		content: "{{ phrase('thtopics_topics_below_won_t_appear_in_some_widget_filters')|escape('js') }}";
+	}
+
+	.topicsLayout--visibleFilterTopics:before {
+		content: "{{ phrase('thtopics_topics_below_won_t_appear_in_horizontal_filters')|escape('js') }}";
+	}
+
+	.topicsLayout--visibleFilterTopics.topicsLayout--visibleFilterTopicsWidget:before {
+		content: "{{ phrase('thtopics_topics_below_won_t_appear_in_horizontal_and_some_widget_filters')|escape('js') }}";
+	}
+
+	.topicsLayout--visibleFilterTopicsVertical:before {
+		content: "{{ phrase('thtopics_topics_below_won_t_appear_in_vertical_filters')|escape('js') }}";
+	}
+
+	.topicsLayout--visibleFilterTopics.topicsLayout--visibleFilterTopicsVertical:before {
+		content: "{{ phrase('thtopics_topics_below_won_t_appear_in_any_filters')|escape('js') }}";
+	}
+</style>
+
+<xf:macro template="option_macros" name="option_form_block" arg-options="{$options}" />
+
+<xf:if is="$widgets is not empty">
+	<div class="block">
+		<div class="block-container">
+			<h2 class="block-header">
+				{{ phrase('widgets') }}
+			</h2>
+			<div class="block-body">
+				<xf:datalist>
+					<tbody class="dataList-rowGroup">
+						<xf:foreach loop="{$widgets}" value="$widget">
+							<xf:datarow
+								label="{$widget.title}"
+								hint="{$widget.widget_key}"
+								href="{{ link('widgets/edit', $widget) }}">
+								<xf:delete href="{{ link('widgets/delete', $widget) }}"
+									tooltip="{{ phrase('delete') }}" />
+							</xf:datarow>
+						</xf:foreach>
+					</tbody>
+				</xf:datalist>
+				<div class="block-footer">
+					<span class="block-footer-counter">{{ display_totals($totalWidgets) }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:if>
+
+<xf:macro name="data_entry"
+		  arg-dataEntry="!"
+		  arg-topics="!">
+	<xf:set var="$topic" value="{$topics.{$dataEntry->id}}" />
+
+	<xf:if is="$topic">
+		<li data-id="{$topic.topic_id}"
+			class="dd-item">
+			<span class="thTopic thTopic--{$topic.topic_id} dd-handle">
+				<i class="fa fa-bars"></i>
+				{$topic.title}
+			</span>
+			<i class="fa fa-remove dd-remove"></i>
+
+			<ol class="dd-list">
+				<xf:foreach loop="$dataEntry->children" value="$child">
+					<xf:macro name="data_entry" arg-dataEntry="{$child}" arg-topics="{$topics}" />
+				</xf:foreach>
+			</ol>
+		</li>
+	</xf:if>
+</xf:macro>

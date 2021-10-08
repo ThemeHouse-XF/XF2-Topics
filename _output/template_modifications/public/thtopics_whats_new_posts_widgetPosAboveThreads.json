@@ -1,0 +1,9 @@
+{
+    "template": "whats_new_posts",
+    "description": "Add widget position above thread list.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"block\"",
+    "replace": "<xf:widgetpos id=\"thtopics_new_posts_above_threads\" />\n\n$0"
+}

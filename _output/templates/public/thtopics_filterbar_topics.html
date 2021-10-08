@@ -1,0 +1,58 @@
+<xf:if is="$nodeTree is not empty">
+	<xf:macro name="forum_filters_list" arg-nodeTree="{$nodeTree}" />
+</xf:if>
+
+<xf:if is="$topics is not empty">
+	<xf:macro name="topic_filters_list" arg-topics="{$topics}" />
+</xf:if>
+
+<xf:macro name="forum_filters_list" arg-nodeTree="!">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<xf:css src="thtopics_widget_topic_filter.less" />
+	<xf:css src="thtopics_filter_list.less" />
+	<xf:js src="themehouse/topics/filter.js"
+		min="themehouse/topics/filter.min.js"
+		addon="ThemeHouse/Topics" />
+
+	<li data-topic-type="node" class="th_topics__clearTopics__wrapper <xf:if is="{{count({$xf.visitor.getForumFilters()}) >= 2}}">thTopics__filterBar--activeFilter</xf:if>">
+		<a href="#" class="th_topics_clearTopics" title="{{ phrase('thtopics_remove_multiple_filters') }}" data-xf-init="tooltip"><i class="fa fa-close"></i></a>
+	</li>
+
+	<xf:foreach loop="$nodeTree->getFlattened()" value="$forum">
+		<xf:if is="$forum.record.node_type_id === 'Forum' || $forum.record.node_type_id === 'Category'">
+			<li data-topic-type="node" data-topic-id="{$forum.record.node_id}"
+				class="topic-filter-item topic-filter-item--node{{ $forum.record.node_type_id === 'Category' ? ' isCategory' : (in_array($forum.record.node_id, {$xf.visitor.getForumFilters()}) ? ' topic-filter-item--active': '' ) }}">
+				<a href="{{ link('forums/all-threads', null, {'forums': $forum.record.title .'.'. $forum.record.node_id}) }}" class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('remove_this_filter') }}">
+					{$forum.record.title}
+				</a>
+			</li>
+		</xf:if>
+	</xf:foreach>
+
+</xf:macro>
+
+<xf:macro name="topic_filters_list" arg-topics="!">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<xf:css src="thtopics_widget_topic_filter.less" />
+	<xf:css src="thtopics_filter_list.less" />
+	<xf:js src="themehouse/topics/filter.js"
+		min="themehouse/topics/filter.min.js"
+		addon="ThemeHouse/Topics" />
+
+	<li data-topic-type="thread" class="th_topics__clearTopics__wrapper <xf:if is="{{count({$xf.visitor.getTopicFilters()}) >= 2}}">thTopics__filterBar--activeFilter</xf:if>">
+		<a href="#" class="th_topics_clearTopics" title="{{ phrase('thtopics_remove_multiple_filters') }}" data-xf-init="tooltip"><i class="fa fa-close"></i></a>
+	</li>
+
+	<xf:foreach loop="$topics" value="$topic">
+		<li data-topic-type="thread" data-topic-id="{$topic.topic_id}"
+			class="topic-filter-item topic-filter-item--thread{$topic.extra_class}{{ in_array($topic.topic_id, {$xf.visitor.getTopicFilters()}) ? ' topic-filter-item--active': '' }}">
+			<a href="{{ link('forums/all-threads', null, {'topics': $topic.title .'.'. $topic.topic_id}) }}" class="filterBar-filterToggle thTopic--{$topic.topic_id}" data-xf-init="tooltip" title="{{ phrase('remove_this_filter') }}">
+				{$topic.title}
+			</a>
+		</li>
+	</xf:foreach>
+
+
+</xf:macro>

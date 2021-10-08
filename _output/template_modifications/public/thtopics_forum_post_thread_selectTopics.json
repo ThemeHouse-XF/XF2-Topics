@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_thread",
+    "description": "Add topic subselector to thread post.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:prefixinputrow",
+    "replace": "<xf:include template=\"thtopics_forum_post_thread_selectTopics\" />\n$0"
+}

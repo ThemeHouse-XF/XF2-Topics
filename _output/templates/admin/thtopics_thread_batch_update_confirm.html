@@ -1,0 +1,30 @@
+<xf:checkboxrow
+	explain="{{ phrase('thtopics_topic_will_only_be_applied_if_valid_for_forum') }}">
+	<xf:option name="actions[apply_thread_topic]"
+			   label="{{ phrase('thtopics_set_topic') }}">
+
+		<xf:dependent>
+			<xf:select name="actions[topic_id]">
+				<xf:option value="0">{{ phrase('(thtopics_no_topic)') }}</xf:option>
+				<xf:foreach loop="$topics" value="$topic">
+					<xf:option value="{$topic.topic_id}" label="{$topic.title}" disabled="{{ !$topic.node_id }}" />
+				</xf:foreach>
+			</xf:select>
+		</xf:dependent>
+	</xf:option>
+</xf:checkboxrow>
+
+<xf:checkboxrow>
+	<xf:option name="actions[apply_thread_topic_additional]"
+			   label="{{ phrase('thtopics_set_additional_topics') }}">
+
+		<xf:dependent>
+			<xf:select name="actions[additional_topic_ids]" multiple="true">
+				<xf:option value="0">{{ phrase('(thtopics_no_topic)') }}</xf:option>
+				<xf:foreach loop="$topics" value="$topic">
+					<xf:option value="{$topic.topic_id}" label="{$topic.title}" disabled="{{ !$topic.additional_selectable }}" />
+				</xf:foreach>
+			</xf:select>
+		</xf:dependent>
+	</xf:option>
+</xf:checkboxrow>

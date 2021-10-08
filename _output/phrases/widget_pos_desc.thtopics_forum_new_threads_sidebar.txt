@@ -1,0 +1,1 @@
+Position inside the forum new threads sidebar for various stats and new content widgets. Note: This page is only available if the default forums page is set to “New threads”.

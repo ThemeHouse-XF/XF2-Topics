@@ -1,0 +1,9 @@
+{
+    "template": "forum_view",
+    "description": "Add context to sidebar widget position.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:widgetpos id=\"forum_view_sidebar\".*?)(\\s?\\/>)/s",
+    "replace": "$1 context-filterBarVisible=\"{{ $xf.options.thtopics_topicFilterForumPages }}\"$2"
+}

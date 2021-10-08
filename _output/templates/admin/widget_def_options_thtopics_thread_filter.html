@@ -1,0 +1,66 @@
+<xf:set var="$max" value="{{ $xf.options.thtopics_visibleFilterTopics > $xf.options.thtopics_visibleFilterTopicsVertical ? $xf.options.thtopics_visibleFilterTopics : $xf.options.thtopics_visibleFilterTopicsVertical }}" />
+
+<hr class="formRowSep" />
+
+<xf:radiorow name="options[type]"
+	label="{{ phrase('thtopics_topics_type') }}">
+
+	<xf:option value="" selected="{{ $options.type != 'node' }}"
+		label="{{ phrase('default') }}"
+		hint="{{ phrase('thtopics_thread_topics_if_enabled_otherwise_nodes') }}">
+		<xf:checkbox>
+			<xf:option name="options[multi_select]" selected="$options.multi_select"
+				label="{{ phrase('thtopics_allow_filtering_by_multiple_topics') }}" />
+		</xf:checkbox>
+	</xf:option>
+
+	<xf:option value="node" selected="{{ $options.type == 'node' }}"
+		label="{{ phrase('thtopics_node_topics') }}" />
+</xf:radiorow>
+
+<xf:radiorow name="options[max_depth_type]"
+	label="{{ phrase('thtopics_maximum_depth_of_topics_to_show') }}">
+
+	<xf:option value="default" selected="{{ !$options.max_depth }}"
+		label="{{ phrase('default') }}" />
+
+	<xf:option value="number" selected="{{ $options.max_depth > 0 }}">
+		<xf:numberbox name="options[max_depth]" min="2" max="{$xf.options.thtopics_filterMaxDepth}"
+			value="{{ $options.max_depth ?: $xf.options.thtopics_filterMaxDepth }}" />
+	</xf:option>
+</xf:radiorow>
+
+<xf:radiorow name="options[visible_filter_topics_type]"
+	label="{{ phrase('thtopics_number_of_topics_to_show') }}">
+
+	<xf:option value="default" selected="{{ !$options.visible_filter_topics }}"
+		label="{{ phrase('default') }}" />
+
+	<xf:option value="number" selected="{{ $options.visible_filter_topics > 0 }}">
+		<xf:numberbox name="options[visible_filter_topics]" min="1" max="{$max}"
+			value="{{ $options.visible_filter_topics ?: $max }}" />
+	</xf:option>
+</xf:radiorow>
+
+<xf:radiorow name="options[style]" value="{$options.style}"
+	label="{{ phrase('display_style') }}">
+
+	<xf:option value=""
+		label="{{ phrase('default') }}"
+		hint="{{ phrase('thtopics_widget_display_default_explain') }}">
+	</xf:option>
+	<xf:option value="simple_vertical"
+		label="{{ phrase('thtopics_simple_vertical') }}"
+		hint="{{ phrase('thtopics_widget_display_simple_vertical_explain') }}">
+	</xf:option>
+	<xf:option value="horizontal_scroller"
+		label="{{ phrase('thtopics_horizontal_scroller') }}"
+		hint="{{ phrase('thtopics_widget_display_horizontal_scroller_explain') }}">
+	</xf:option>
+</xf:radiorow>
+
+<xf:checkboxrow value="{{ $options.style ?: 'simple_vertical' }}">
+	<xf:option name="options[responsive]" selected="$options.responsive"
+		label="{{ phrase('thtopics_make_responsive') }}"
+		hint="{{ phrase('thtopics_make_responsive_hint')}}" />
+</xf:checkboxrow>

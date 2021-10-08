@@ -1,0 +1,2 @@
+If enabled, this topic can also be selected as an additional topic. When added to a thread as an additional topic, the thread will <strong>not</strong> inherit any attributes from the associated node, such as permissions, but will be found in that topics thread list as well.<br />
+It is recommended to turn this option off for topics that are associated with nodes that have a special permission set applied (such as administrator only forums).

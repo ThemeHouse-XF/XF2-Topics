@@ -1,0 +1,29 @@
+{
+    "group_name": "thtopics",
+    "title": "Base topic styling",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "border_width_simple",
+        "border_color_simple",
+        "border_radius_simple",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "border-radius": "@xf-borderRadiusSmall",
+        "padding-top": "2px",
+        "padding-right": "4px",
+        "padding-bottom": "2px",
+        "padding-left": "4px"
+    },
+    "display_order": 10
+}

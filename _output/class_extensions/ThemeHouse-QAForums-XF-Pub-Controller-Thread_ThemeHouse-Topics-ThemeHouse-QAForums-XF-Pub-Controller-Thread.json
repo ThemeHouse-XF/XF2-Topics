@@ -1,0 +1,6 @@
+{
+    "from_class": "ThemeHouse\\QAForums\\XF\\Pub\\Controller\\Thread",
+    "to_class": "ThemeHouse\\Topics\\ThemeHouse\\QAForums\\XF\\Pub\\Controller\\Thread",
+    "execute_order": 10,
+    "active": true
+}

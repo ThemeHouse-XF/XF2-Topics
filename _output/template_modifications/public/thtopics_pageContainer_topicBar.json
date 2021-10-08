@@ -1,0 +1,9 @@
+{
+    "template": "PAGE_CONTAINER",
+    "description": "Adds topic bar to PAGE_CONTAINER",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"$headerHtml",
+    "replace": "<xf:if is=\"$thtopics_showTopicBar\">\n\t<xf:set var=\"$headerHtml\">\n\t\t<xf:include template=\"thtopics_topic_heading\" />\n\t\t<xf:if is=\"$headerHtml is not empty\">\n\t\t\t{$headerHtml|raw}\n\t\t</xf:if>\n\t</xf:set>\n</xf:if>\n$0"
+}

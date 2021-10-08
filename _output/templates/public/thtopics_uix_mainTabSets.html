@@ -1,0 +1,12 @@
+<xf:if is="{$xf.options.thtopics_showAllThreadsPage}">
+	<a href="{{ link('forums/all-threads') }}"
+	   class="tabs-tab {{$activeTab == 'allThreads' ? 'is-active' : '' }}">
+		{{ phrase('thtopics_all_threads') }}
+	</a>
+</xf:if>
+<xf:if is="{$xf.options.thtopics_showNewThreadsPage}">
+	<a href="{{ link('forums/new-threads') }}"
+	   class="tabs-tab {{$activeTab == 'newThreads' ? 'is-active' : '' }}">
+		{{ phrase('thtopics_new_threads') }}
+	</a>
+</xf:if>

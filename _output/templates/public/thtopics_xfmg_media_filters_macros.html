@@ -1,0 +1,9 @@
+<xf:macro name="above_sort_by" arg-filters="!" arg-mediaGalleryFilters="!">
+	<div class="menu-row menu-row--separated">
+		<xf:checkbox>
+			<xf:foreach loop="$mediaGalleryFilters" key="$mediaGalleryFilterId" value="$mediaGalleryFilter">
+				<xf:option name="thtopics_filters[{$mediaGalleryFilterId}]" selected="{$filters.thtopics_filters.{$mediaGalleryFilterId}}">{$mediaGalleryFilter.title}</xf:option>
+			</xf:foreach>
+		</xf:checkbox>
+	</div>
+</xf:macro>

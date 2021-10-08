@@ -1,0 +1,26 @@
+<xf:macro name="go_thread_bar" arg-thread="!" arg-watchType="!">
+	<table cellpadding="10" cellspacing="0" border="0" width="100%" class="linkBar">
+	<tr>
+		<td>
+			<a href="{{ link('canonical:threads/unread', $thread, {'new': 1}) }}" class="button">{{ phrase('view_this_thread') }}</a>
+		</td>
+		<td align="{{ $xf.isRtl ? 'left' : 'right' }}">
+			<xf:if is="$watchType == 'threads'">
+				<a href="{{ link('canonical:watched/threads') }}" class="buttonFake">{{ phrase('watched_threads') }}</a>
+			<xf:elseif is="$watchType == 'forums'" />
+				<a href="{{ link('canonical:watched/topics') }}" class="buttonFake">{{ phrase('thtopics_watched_topics') }}</a>
+			</xf:if>
+		</td>
+	</tr>
+	</table>
+</xf:macro>
+
+<xf:macro name="watched_topic_footer" arg-thread="!" arg-topic="!">
+	{{ phrase('thtopics_watched_topic_email_html_footer', {
+		'thread': '<a href="' . link('canonical:threads', $thread) . '">' .  $thread.title . '</a>',
+		'topic_title': $topic.title,
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'topic', 'id': $topic.topic_id}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+	}) }}
+</xf:macro>

@@ -1,0 +1,12 @@
+<xf:set var="$topicsChooser"><xf:trim>
+	<xf:macro template="thtopics_topic_chooser_macros"
+                name="post_thread_chooser"
+                arg-noPadding="{{ true }}"
+				arg-selectedTopicId="{$selectedTopicId}"
+				arg-topics="{$topics}"
+				arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+				arg-additionalTopics="{$additionalTopics}" />
+</xf:trim></xf:set>
+<xf:if is="$topicsChooser is not empty">
+	{$topicsChooser}
+</xf:if>

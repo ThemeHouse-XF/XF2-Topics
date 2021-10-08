@@ -1,0 +1,9 @@
+{
+    "template": "whats_new_wrapper",
+    "description": "Add \"New threads' to what's new wrapper.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:links:start]-->",
+    "replace": "$0\n\t<xf:macro template=\"thtopics_whats_new_wrapper_macros\" name=\"links\" arg-pageSelected=\"{$pageSelected}\" arg-baseClass=\"{$baseClass}\" arg-selectedClass=\"{$selectedClass}\" />"
+}

@@ -1,0 +1,9 @@
+{
+    "template": "helper_js_global",
+    "description": "Add topics json to all pages.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--XF:JS-->",
+    "replace": "$0\n<xf:if is=\"{$xf.options.thtopics_allowTopicWidgetsAnyPosition}\">\n\t<xf:if is=\"{$xf.options.thtopics_enableTopics}\">\n\t\t<script>\n\t\tvar themehouse = themehouse || {};\n\t\tthemehouse.topics = themehouse.topics || {};\n\t\tthemehouse.topics.titles = themehouse.topics.titles || {};\n\t\tthemehouse.topics.titles.thread = {{ th_thread_topic_titles_json() }};\n\t\t</script>\n\t</xf:if>\n\t<xf:if is=\"{$xf.options.thtopics_enableNodeTopics}\">\n\t\t<script>\n\t\tvar themehouse = themehouse || {};\n\t\tthemehouse.topics = themehouse.topics || {};\n\t\tthemehouse.topics.titles = themehouse.topics.titles || {};\n\t\tthemehouse.topics.titles.node = {{ th_node_topic_titles_json() }};\n\t\t</script>\n\t</xf:if>\n</xf:if>"
+}

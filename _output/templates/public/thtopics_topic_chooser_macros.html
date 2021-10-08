@@ -1,0 +1,306 @@
+<xf:macro name="topic_with_heading"
+		arg-selectedTopicId="{{ false }}"
+		arg-topics="!"
+		arg-selectedAdditionalTopicIds=""
+		arg-additionalTopics=""
+		arg-triggerOnUnset="{{ true }}"
+		arg-visibleFilterTopics="0"
+		arg-allTopicsTarget=""
+		arg-editTopicsTarget=""
+		arg-forum=""
+		arg-noPadding="{{ false }}">
+	<xf:css src="thtopics_topic_chooser.less" />
+
+	<xf:js src="themehouse/topics/topicChooser.js"
+			min="themehouse/topics/topicChooser.min.js"
+			addon="ThemeHouse/Topics" />
+
+	<xf:if contentcheck="true">
+		<xf:hiddenval name="topic_id" value="{$selectedTopicId}" class="js-topicId" data-trigger-on-unset="{$triggerOnUnset}" />
+		<xf:macro name="heading"
+				arg-selectedTopicId="{$selectedTopicId}"
+				arg-topics="{$topics}"
+				arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+				arg-additionalTopics="{$additionalTopics}"
+				arg-editTopicsTarget="{$editTopicsTarget}"
+				arg-forum="{$forum}"
+				arg-noPadding="{$noPadding}" />
+		<xf:contentcheck>
+			<xf:macro name="topics"
+					arg-selectedTopicId="{$selectedTopicId}"
+					arg-topics="{$topics}"
+					arg-visibleFilterTopics="{$visibleFilterTopics}"
+					arg-allTopicsTarget="{$allTopicsTarget}"
+					arg-noPadding="{$noPadding}" />
+		</xf:contentcheck>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="heading"
+		arg-selectedTopicId="!"
+		arg-topics="!"
+		arg-selectedAdditionalTopicIds="{{ false }}"
+		arg-additionalTopics="!"
+		arg-editTopicsTarget=""
+		arg-forum=""
+		arg-noPadding="{{ false }}">
+	<xf:if is="$forum is empty || $xf.visitor.hasNodePermission($forum.node_id, 'th_postThreadWithoutTopic')">
+		<xf:set var="$xfClick" value="th_topicClick" />
+	<xf:else />
+		<xf:set var="$xfClick" value="th_topicChooser" />
+		<xf:set var="$href" value="{{ link('forums/create-thread') }}" />
+		<xf:set var="$nodeId" value="{$forum.node_id}" />
+	</xf:if>
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<div class="formInfoRow thTopic__createThreadBar{{ $noPadding ? ' formInfoRow--noPadding' : '' }}" style="{{ $selectedTopicId ? '' : 'display:none' }}">
+		<ul class="thTopic__createThreadBar__topics">
+			<li class="thTopic thTopic--m {$topics.{$selectedTopicId}.extra_class}{{ $selectedTopicId ? " thTopic--{$selectedTopicId}" : ''}}" data-href="{$href}" data-node-id="{$nodeId}" data-xf-click="{$xfClick}" data-topic-id="{$selectedTopicId}">
+				<xf:if is="$selectedTopicId">{$topics.{$selectedTopicId}.title}</xf:if>
+			</li>
+			<xf:if is="$selectedAdditionalTopicIds">
+				<xf:foreach loop="$selectedAdditionalTopicIds" value="$selectedAdditionalTopicId">
+					<li class="thTopic thTopic--m thTopic--{$selectedAdditionalTopicId}" data-xf-click="th_topicClick" data-is-additional="1" data-topic-id="{$selectedAdditionalTopicId}">
+						{$additionalTopics.{$selectedAdditionalTopicId}.title}
+					</li>
+				</xf:foreach>
+			</xf:if>
+		</ul>
+		<xf:if is="$editTopicsTarget && $xf.options.thtopics_maxAdditionalTopics > 0">
+			<a class="button button--link th_allTopicsTrigger" data-xf-click="overlay" data-target="{$editTopicsTarget}">
+				<span class="button-text">
+					{{ phrase('thtopics_edit_topics') }}
+					<span class="thTopic__createThreadBar__topics--plus"></span>
+				</span>
+			</a>
+		</xf:if>
+	</div>
+</xf:macro>
+
+<xf:macro name="topics"
+		arg-selectedTopicId="{{ false }}"
+		arg-selectedAdditionalTopicIds="{{ false }}"
+		arg-description=""
+		arg-topics="!"
+		arg-visibleFilterTopics="0"
+		arg-allTopicsTarget=""
+		arg-isAdditional="{{ false }}"
+		arg-noPadding="{{ false }}">
+	<xf:set var="$thTopicsCount" value="0" />
+	<xf:if is="$topics is not empty">
+		<xf:foreach loop="$topics" value="$topic">
+			<xf:set var="$thTopicsCount" value="{{$thTopicsCount + 1}}" />
+		</xf:foreach>
+	</xf:if>
+	<xf:if is="{$thTopicsCount}">
+		<div>
+			<xf:formrow rowtype="fullWidth noLabel thTopics{{ $noPadding ? ' noPadding' : '' }}{{ $isAdditional ? ' additionalTopics' : ''}}{{ $selectedTopicId ? ' topicSelected' : ''}}">
+				<xf:if is="$description">
+					<div class="block-rowMessage block-rowMessage--important">
+						{$description}
+					</div>
+				</xf:if>
+				<xf:if is="!$visibleFilterTopics || $thTopicsCount > $visibleFilterTopics">
+					<xf:macro name="topics_search" arg-allTopicsTarget="{$allTopicsTarget}" />
+				</xf:if>
+
+				<div class="thTopicChooser topic-filter-grid {{ $visibleFilterTopics ? "topic-visible-filters-{$visibleFilterTopics}" : 'thTopicChooser__all' }}"
+						data-max-topics="{$xf.options.thtopics_maxAdditionalTopics}"
+						data-group-multi-select="{$xf.options.thtopics_groupMultiSelect}">
+					<xf:macro name="topic_chooser"
+							arg-selectedTopicId="{$selectedTopicId}"
+							arg-topics="{$topics}"
+							arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+							arg-isAdditional="{$isAdditional}" />
+				</div>
+
+				<xf:if is="!$visibleFilterTopics || $thTopicsCount > $visibleFilterTopics">
+					<div class="th_topics__noResults block-row">
+						{{ phrase('no_results_found') }}
+					</div>
+				</xf:if>
+			</xf:formrow>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="post_thread_chooser"
+		arg-selectedTopicId="{{ false }}"
+		arg-topics="!"
+		arg-selectedAdditionalTopicIds="{{ false }}"
+		arg-additionalTopics="!"
+		arg-triggerOnUnset="{{ true }}"
+		arg-forum=""
+		arg-noPadding="{{ false }}">
+	<xf:macro name="topic_with_heading"
+			arg-selectedTopicId="{$selectedTopicId}"
+			arg-topics="{$topics}"
+			arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+			arg-additionalTopics="{$additionalTopics}"
+			arg-triggerOnUnset="{$triggerOnUnset}"
+			arg-allTopicsTarget=".forum_post_thread__allTopics"
+			arg-editTopicsTarget=".forum_post_thread__editTopics"
+			arg-visibleFilterTopics="{$xf.options.thtopics_visibleTopicsNewThread}"
+			arg-forum="{$forum}"
+			arg-noPadding="{$noPadding}" />
+	<xf:if is="$xf.options.thtopics_maxAdditionalTopics > 0">
+		<div style="display: none">
+			<div class="block forum_post_thread__editTopics">
+				<div class="overlay-title">{{ phrase('thtopics_edit_topics') }}</div>
+				<div class="block-container">
+					<div class="block-body">
+						<xf:macro name="heading"
+								arg-selectedTopicId="{$selectedTopicId}"
+								arg-topics="{$topics}"
+								arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+								arg-additionalTopics="{$additionalTopics}" />
+						<xf:macro name="topics"
+								arg-selectedTopicId="{$selectedTopicId}"
+								arg-topics="{$topics}" />
+						<xf:if is="$xf.options.thtopics_maxAdditionalTopics">
+							<div>
+								<xf:macro name="additional_topics"
+										arg-selectedTopicId="{$selectedTopicId}"
+										arg-topics="{$additionalTopics}"
+										arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}" />
+							</div>
+						</xf:if>
+					</div>
+				</div>
+				<div class="block-footer">
+					<span class="block-footer-controls">
+						<xf:button class="button button--primary button--icon button--icon--write js-overlayClose">{{ phrase('continue') }}</xf:button>
+					</span>
+				</div>
+			</div>
+			<div class="forum_post_thread__allTopics">
+				<div class="overlay-title">{{ phrase('thtopics_edit_topics') }}</div>
+				<div class="block-container">
+					<div class="block-body">
+						<xf:macro name="topics"
+								arg-selectedTopicId="{$selectedTopicId}"
+								arg-topics="{$topics}" />
+						<xf:if is="$xf.options.thtopics_maxAdditionalTopics">
+							<div>
+								<xf:macro name="additional_topics"
+										arg-selectedTopicId="{$selectedTopicId}"
+										arg-topics="{$additionalTopics}"
+										arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}" />
+							</div>
+						</xf:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+
+</xf:macro>
+
+<xf:macro name="topics_search"
+		  arg-allTopicsTarget="">
+	<xf:js src="themehouse/topics/topicsSearch.js"
+		min="themehouse/topics/topicsSearch.min.js"
+		addon="ThemeHouse/Topics" />
+	<div class="th_topicsSearch{{ $allTopicsTarget ? ' inputGroup' : '' }}">
+		<input placeholder="{{phrase('thtopics_search_topics...')}}" class="input" />
+		<xf:if is="$allTopicsTarget">
+			<a class="button button--link th_allTopicsTrigger" data-xf-click="overlay" data-target="{$allTopicsTarget}">
+				<span class="button-text">
+					{{ phrase('thtopics_edit_topics') }}
+				</span>
+			</a>
+		</xf:if>
+	</div>
+</xf:macro>
+
+<xf:macro name="topic"
+		arg-topic="!"
+		arg-extraClass=""
+		arg-href="{{ false }}"
+		arg-tag="a"
+		arg-style=""
+		arg-selected="{{ false }}"
+		arg-onClick="{{ false }}"
+		arg-isAdditional="{{ false }}">
+	<xf:css src="thtopics.less" />
+	<xf:css src="thtopics_topic_cache.less" />
+	<xf:css src="thtopics_widget_topic_filter.less" />
+	<xf:if is="!{$href}">
+		<xf:set var="$href" value="{{ th_topics_topic_url($topic) }}" />
+	</xf:if>
+	<xf:set var="$extra" value="" />
+	<xf:if is="$onClick">
+		<xf:set var="$extra" value="{$extra} data-xf-click='{$onClick}'" />
+	</xf:if>
+
+	<{$tag} href="{$href}"
+			style="{$style}"
+			class="topic-filter-item topic-filter-item--thread {$topic.extra_class} {$extraClass}{{ $selected ? ' topic-filter-item--active' : ''}}"
+			data-topic-id="{$topic.topic_id}"
+			data-topic-title="{$topic.title}"
+			data-topic-group-id="{$topic.topic_group_id}"
+			data-is-additional="{{ $isAdditional ? 1 : 0 }}"
+			{$extra|raw}
+			>
+		<i class="thTopicAction thTopicAction--add thTopicAction--{$topic.topic_id} {$topic.extra_class} {$extraClass}" data-topic-id="{$topic.topic_id}"></i>
+		<i class="thTopicAction thTopicAction--remove thTopicAction--{$topic.topic_id} {$topic.extra_class} {$extraClass}" data-topic-id="{$topic.topic_id}"></i>
+		<span class="thTopic--title">{$topic.title}</span>
+	</a>
+</xf:macro>
+
+<xf:macro name="topic_chooser"
+		arg-selectedTopicId="{{ false }}"
+		arg-topics="{{ false }}"
+		arg-selectedAdditionalTopicIds="{{ false }}"
+		arg-isAdditional="{{ false }}">
+	<xf:foreach loop="$topics" value="$topic">
+		<xf:if is="(!$isAdditional && $topic.Forum && $topic.Forum.canCreateThread()) || ($isAdditional && $topic.additional_selectable)">
+			<xf:macro name="topic"
+					arg-topic="{$topic}"
+					arg-href="javascript:void(0)"
+					arg-onClick="th_topicClick"
+					arg-selected="{{ in_array($topic.topic_id, $selectedAdditionalTopicIds) }}"
+					arg-extraClass="{{ $selectedTopicId == $topic.topic_id ? 'topic-filter-item--hide' : '' }}"
+					arg-isAdditional="{$isAdditional}" />
+		</xf:if>
+	</xf:foreach>
+</xf:macro>
+
+<xf:macro name="chooser"
+		arg-selectedTopicId="{{ false }}"
+		arg-topics="!"
+		arg-selectedAdditionalTopicIds="{{ false }}"
+		arg-additionalTopics="!"
+		arg-triggerOnUnset="{{ true }}">
+	<xf:macro name="topic_with_heading"
+			arg-selectedTopicId="{$selectedTopicId}"
+			arg-topics="{$topics}"
+			arg-triggerOnUnset="{$triggerOnUnset}" />
+
+	<xf:if is="$xf.options.thtopics_maxAdditionalTopics">
+		<xf:macro name="additional_topics"
+				arg-selectedTopicId="{$selectedTopicId}"
+				arg-topics="{$additionalTopics}"
+				arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}" />
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="additional_topics"
+		arg-selectedTopicId="{{ false }}"
+		arg-topics="{{ false }}"
+		arg-selectedAdditionalTopicIds="{{ false }}">
+	<xf:if contentcheck="true">
+		<xf:contentcheck>
+			<xf:macro name="topics"
+					arg-selectedTopicId="{$selectedTopicId}"
+					arg-selectedAdditionalTopicIds="{$selectedAdditionalTopicIds}"
+					arg-description="{{ phrase('thtopics_select_additional_topics', {'max': {$xf.options.thtopics_maxAdditionalTopics}}) }}"
+					arg-topics="{$topics}"
+					arg-allTopicsTarget="{$allTopicsTarget}"
+					arg-isAdditional="{{ true }}" />
+		</xf:contentcheck>
+		<xf:hiddenval name="additional_topic_ids"
+				value="{{ th_topics_json_raw($selectedAdditionalTopicIds, 'int') }}"
+				class="js-additionalTopicIds" />
+	</xf:if>
+</xf:macro>

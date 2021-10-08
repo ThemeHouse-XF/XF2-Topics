@@ -1,0 +1,1 @@
+If you select a topic group, it will only be possible for a user to select up to {max} topic(s) in total from that group.

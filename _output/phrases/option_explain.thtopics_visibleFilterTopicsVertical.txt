@@ -1,0 +1,1 @@
+Maximum number of topics to show in simple vertical filters before moving remaining topics to a "Show all" menu. Individual widgets can be set to show less than this number of topics, but not more.
